@@ -1,9 +1,16 @@
+import 'package:artify/app_background/app_state_provider.dart';
 import 'package:artify/app_widgets/main_bottom_nav.dart';
+// import 'package:artify/app_widgets/main_middel_nav.dart';
+import 'package:artify/pages/catagory_page.dart';
+import 'package:artify/pages/home_page.dart';
+import 'package:artify/pages/setting_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
+  final pages = [HomePage(), CatagoryPage(), SettingPage()];
   final bottomNavElemnts = [
     {"icon": CupertinoIcons.home, "label": "Home"},
     {"icon": CupertinoIcons.rectangle_grid_2x2, "label": "Catagory"},
@@ -12,13 +19,13 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
+    final appProvider = Provider.of<AppStateProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         children: [
           mainBottomNav(context, bottomNavElemnts),
-          Container(alignment: Alignment.center, width: screenSize.width - 30),
+          pages[appProvider.mainBottomNavIndex],
         ],
       ),
     );

@@ -10,14 +10,14 @@ Widget mainMiddelNav(
   Size screenSize = MediaQuery.sizeOf(context);
   final appStateProvider = Provider.of<AppStateProvider>(context);
   return Container(
-    margin: EdgeInsets.all(20),
-    height: screenSize.height / 7,
+    margin: EdgeInsets.all(screenSize.width / 20.6),
+    height: screenSize.height / 10.7,
     decoration: BoxDecoration(
       color: appBlack(1),
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(screenSize.width / 13.7),
     ),
-    child: Flex(
-      direction: Axis.horizontal,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         for (var element in elements)
           InkWell(
@@ -27,13 +27,26 @@ Widget mainMiddelNav(
               );
             },
             child: Container(
-              decoration: BoxDecoration(gradient: buttonGradient),
+              margin: EdgeInsets.symmetric(vertical: screenSize.width / 41.5),
+              width:
+                  (appStateProvider.mainMiddelNavIndex ==
+                          elements.indexOf(element))
+                      ? screenSize.width / 3
+                      : null,
+              decoration: BoxDecoration(
+                gradient:
+                    (appStateProvider.mainMiddelNavIndex ==
+                            elements.indexOf(element))
+                        ? buttonGradient
+                        : null,
+                borderRadius: BorderRadius.circular(screenSize.width / 13.7),
+              ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     element["icon"],
-                    size: 30,
+                    size: screenSize.width / 13.7,
                     color:
                         (appStateProvider.mainMiddelNavIndex ==
                                 elements.indexOf(element))
@@ -43,7 +56,8 @@ Widget mainMiddelNav(
                   Text(
                     element["label"],
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: screenSize.width / 20.6,
+                      fontWeight: FontWeight.bold,
                       color:
                           (appStateProvider.mainMiddelNavIndex ==
                                   elements.indexOf(element))

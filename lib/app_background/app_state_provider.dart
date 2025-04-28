@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+
+class AppStateProvider extends ChangeNotifier {
+  // for welcoming page
+  int _startBottomIndex = 0;
+  int get startBottomIndex => _startBottomIndex;
+  void incrementStartBottomIndex() {
+    _startBottomIndex++;
+    notifyListeners();
+  }
+
+  // for main page
+  int _mainBottomNavIndex = 0;
+  int get mainBottomNavIndex => _mainBottomNavIndex;
+  void changeMainBottomNavIndex(int index) {
+    _mainBottomNavIndex = index;
+    notifyListeners();
+  }
+
+  int _mainMiddelNavIndex = 0;
+  int get mainMiddelNavIndex => _mainMiddelNavIndex;
+  void changeMainMiddelNavIndex(int value) {
+    _mainMiddelNavIndex = value;
+    notifyListeners();
+  }
+}

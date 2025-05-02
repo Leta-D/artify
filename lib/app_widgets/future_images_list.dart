@@ -1,23 +1,33 @@
+import 'package:artify/app_background/app_state_provider.dart';
 import 'package:artify/app_widgets/image_frames.dart';
 import 'package:artify/network_control/network_to_api.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Widget futureImagesList(BuildContext context) {
   final _scrollController = ScrollController();
-  _scrollController.addListener(() {
+  final appProvider = Provider.of<AppStateProvider>(context);
+  _scrollController.addListener(() async {
     if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent)
+        _scrollController.position.maxScrollExtent) {
+      images.add(await fetchData("query", 2));
+      // appProvider.momo(2);
       print("End");
+    }
   });
 
   return FutureBuilder(
     future: fetchData("query", 1),
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return SizedBox(
-          width: 100,
-          height: 100,
-          child: CircularProgressIndicator(),
+        return Center(
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: CircularProgressIndicator(
+              color: Color.fromRGBO(221, 77, 166, 1),
+            ),
+          ),
         );
       } else {
         if (snapshot.hasData) {

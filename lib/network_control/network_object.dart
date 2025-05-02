@@ -12,7 +12,7 @@ class NetworkObject {
   factory NetworkObject.fromJson(Map<String, dynamic> json) {
     return NetworkObject(
       id: json['id'],
-      rawUrl: json['urls']['raw'], //full better speed
+      rawUrl: json['urls']['small'], //full better speed
       downUrl: json['links']['download'],
       likes: json['likes'],
     );

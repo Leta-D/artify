@@ -25,4 +25,11 @@ class AppStateProvider extends ChangeNotifier {
     _mainMiddelNavIndex = value;
     notifyListeners();
   }
+
+  bool _isLoadingImage = true;
+  get isLoadingImage => _isLoadingImage;
+  void momo(bool value) {
+    _isLoadingImage = value;
+    notifyListeners();
+  }
 }

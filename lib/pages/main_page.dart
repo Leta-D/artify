@@ -24,8 +24,8 @@ class MainPage extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          mainBottomNav(context, bottomNavElemnts),
           pages[appProvider.mainBottomNavIndex],
+          mainBottomNav(context, bottomNavElemnts),
         ],
       ),
     );

@@ -6,9 +6,14 @@ import 'package:provider/provider.dart';
 Widget mainMiddelNav(
   BuildContext context,
   List<Map<String, dynamic>> elements,
+  bool isHomePage,
 ) {
   Size screenSize = MediaQuery.sizeOf(context);
   final appStateProvider = Provider.of<AppStateProvider>(context);
+  int currentIndex =
+      isHomePage
+          ? appStateProvider.mainMiddelNavIndex
+          : appStateProvider.categoryNavIndex;
   return Container(
     margin: EdgeInsets.all(screenSize.width / 20.6),
     height: screenSize.height / 10.7,
@@ -22,21 +27,23 @@ Widget mainMiddelNav(
         for (var element in elements)
           InkWell(
             onTap: () {
-              appStateProvider.changeMainMiddelNavIndex(
-                elements.indexOf(element),
-              );
+              isHomePage
+                  ? appStateProvider.changeMainMiddelNavIndex(
+                    elements.indexOf(element),
+                  )
+                  : appStateProvider.changeCategoryNavIndex(
+                    elements.indexOf(element),
+                  );
             },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: screenSize.width / 41.5),
               width:
-                  (appStateProvider.mainMiddelNavIndex ==
-                          elements.indexOf(element))
+                  (currentIndex == elements.indexOf(element))
                       ? screenSize.width / 3
                       : null,
               decoration: BoxDecoration(
                 gradient:
-                    (appStateProvider.mainMiddelNavIndex ==
-                            elements.indexOf(element))
+                    (currentIndex == elements.indexOf(element))
                         ? buttonGradient
                         : null,
                 borderRadius: BorderRadius.circular(screenSize.width / 13.7),
@@ -48,8 +55,7 @@ Widget mainMiddelNav(
                     element["icon"],
                     size: screenSize.width / 13.7,
                     color:
-                        (appStateProvider.mainMiddelNavIndex ==
-                                elements.indexOf(element))
+                        (currentIndex == elements.indexOf(element))
                             ? appWhite(1)
                             : appGrey(1),
                   ),
@@ -59,8 +65,7 @@ Widget mainMiddelNav(
                       fontSize: screenSize.width / 20.6,
                       fontWeight: FontWeight.bold,
                       color:
-                          (appStateProvider.mainMiddelNavIndex ==
-                                  elements.indexOf(element))
+                          (currentIndex == elements.indexOf(element))
                               ? appWhite(1)
                               : appGrey(1),
                     ),

@@ -95,6 +95,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
               backgroundColor: appBlack(1),
               foregroundColor: appWhite(1),
               onPressed: () {
+                fetchImageById("all");
                 print("Download");
               },
               child: Icon(CupertinoIcons.down_arrow),

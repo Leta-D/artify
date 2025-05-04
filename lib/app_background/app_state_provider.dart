@@ -26,6 +26,15 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // for category page
+  int _categoryNavIndex = 0;
+  int get categoryNavIndex => _categoryNavIndex;
+  void changeCategoryNavIndex(int value) {
+    _categoryNavIndex = value;
+    notifyListeners();
+  }
+
+  // --------------------------
   bool _isLoadingImage = true;
   get isLoadingImage => _isLoadingImage;
   void momo(bool value) {

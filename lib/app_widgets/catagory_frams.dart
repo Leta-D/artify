@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 Widget catagoryFrames(String text, String imageUrl) {
   return Container(
     margin: EdgeInsets.all(10),
+    padding: EdgeInsets.all(5),
     decoration: BoxDecoration(
       color: appGrey(1),
       borderRadius: BorderRadius.circular(15),
     ),
     child: InkWell(
       onTap: () {
-        // print(featchData("God"));
+        print(text);
       },
       child: Stack(
         children: [

@@ -34,15 +34,15 @@ Future fetchData(String query, int page) async {
   }
 }
 
-Future<NetworkObject?> fetchImageById(String id) async {
+Future fetchImageById(String query) async {
   // final appProvide = Provider.of<AppStateProvider>(context);
 
-  // dio.options.queryParameters = {'per_page': 18, 'query': query};
+  dio.options.queryParameters = {'per_page': 18};
   try {
-    Response response = await dio.get('/photos/$id');
+    Response response = await dio.get('/collections');
 
     if (response.statusCode == 200) {
-      return NetworkObject.fromJson(response.data);
+      print(response.data);
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");
     }

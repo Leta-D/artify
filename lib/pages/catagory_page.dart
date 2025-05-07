@@ -16,10 +16,10 @@ class CatagoryPage extends StatelessWidget {
     {"icon": CupertinoIcons.search_circle_fill, "label": "Search"},
   ];
 
-  final categoryNavs = [categoryCollections(), categorySearch()];
-
   @override
   Widget build(BuildContext context) {
+    final categoryNavs = [categoryCollections(context), categorySearch()];
+
     Size screenSize = MediaQuery.sizeOf(context);
     final appProvider = Provider.of<AppStateProvider>(context);
     return Stack(

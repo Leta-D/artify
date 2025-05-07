@@ -66,6 +66,23 @@ flutter:
     - assets/images/background2.jpg
     - assets/images/background3.jpg
 
+    - assets/images/collections/abstract.jpg
+    - assets/images/collections/animals.jpg
+    - assets/images/collections/archetecture.jpg
+    - assets/images/collections/blackAndWhite.jpg
+    - assets/images/collections/cars.jpg
+    - assets/images/collections/city.jpg
+    - assets/images/collections/fantacy.jpg
+    - assets/images/collections/forest.jpg
+    - assets/images/collections/nature.jpg
+    - assets/images/collections/technology.jpg
+    - assets/images/collections/underWater.jpg
+    - assets/images/collections/beatch.jpg
+    - assets/images/collections/bridge.jpg
+    - assets/images/collections/colorful.jpg
+    - assets/images/collections/motivational.jpg
+    - assets/images/collections/space.jpg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

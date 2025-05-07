@@ -11,12 +11,19 @@ import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-
+  /*
+- assets/images/collections/beatch.jpg
+    - assets/images/collections/bridge.jpg
+    - assets/images/collections/colorful.jpg
+    - assets/images/collections/motivational.jpg
+    - assets/images/collections/space.jpg
+*/
   final Map<String, String> dashboardEvents = {
-    "Beaches": "Beach",
-    "Bridges": "NaN",
-    "Colorful": "City",
-    "Fashion": "City",
+    "Beaches": "assets/images/collections/beatch.jpg",
+    "Bridges": "assets/images/collections/bridge.jpg",
+    "motivational": "assets/images/collections/motivational.jpg",
+    "colorful": "assets/images/collections/colorful.jpg",
+    "wallpaper space": "assets/images/collections/space.jpg",
   };
 
   final middelNavElemnts = [

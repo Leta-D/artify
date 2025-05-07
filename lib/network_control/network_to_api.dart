@@ -34,14 +34,34 @@ Future fetchData(String query, int page) async {
   }
 }
 
-Future fetchImageById(String query) async {
-  // final appProvide = Provider.of<AppStateProvider>(context);
+List currentCollectionIds = [];
 
-  dio.options.queryParameters = {'per_page': 18};
+Future fetchImageCollectionId(String query) async {
+  dio.options.queryParameters = {'query': query}; //'per_page': 10
   try {
-    Response response = await dio.get('/collections');
+    Response response = await dio.get('/search/collections');
 
     if (response.statusCode == 200) {
+      var x;
+      for (var item in response.data['results']) {
+        currentCollectionIds.add(item['id']);
+      }
+      print(currentCollectionIds);
+    } else {
+      print("Failed to fetch data, Status code: ${response.statusCode}");
+    }
+  } catch (e) {
+    print("Error: $e");
+  }
+}
+
+Future fetchImageByCollectionId(String id) async {
+  dio.options.queryParameters = {'per_page': 3}; //'per_page': 10
+  try {
+    Response response = await dio.get('/collections/$id/photos');
+
+    if (response.statusCode == 200) {
+      var x;
       print(response.data);
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");

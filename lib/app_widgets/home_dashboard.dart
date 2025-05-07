@@ -40,7 +40,12 @@ Widget homeDashboard(
       controller: _pageControler,
       children: [
         for (var key in dashboardEvents.keys)
-          catagoryFrames(key, dashboardEvents[key]!),
+          catagoryFrames(
+            key,
+            dashboardEvents[key]!,
+            dashboardEvents[key]!,
+            context,
+          ),
       ],
     ),
   );

@@ -50,7 +50,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
           child: CachedNetworkImage(
             imageUrl: imageUrl,
             scale: 2,
-            height: screenSize.height - screenSize.height / 7.4,
+            height: screenSize.height - screenSize.height / 7,
             fit: BoxFit.cover,
             progressIndicatorBuilder: (context, url, progress) {
               return Center(
@@ -95,7 +95,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
               backgroundColor: appBlack(1),
               foregroundColor: appWhite(1),
               onPressed: () {
-                fetchImageById("all");
+                fetchImageByCollectionId('907185');
                 print("Download");
               },
               child: Icon(CupertinoIcons.down_arrow),

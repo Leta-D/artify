@@ -1,3 +1,6 @@
+import 'package:artify/app_theme/app_colors.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 final Map<String, String> unsplashTopics = {
@@ -23,6 +26,57 @@ final Map<String, String> unsplashTopics = {
   "Wallpapers": "Wallpapers",
 };
 
-Widget categorySearch() {
-  return Container(child: Text("Category Search"));
+Widget categorySearch(BuildContext context) {
+  Size screenSize = MediaQuery.sizeOf(context);
+  return Column(
+    children: [
+      Container(
+        margin: EdgeInsets.only(top: screenSize.height / 7.4),
+        padding: EdgeInsets.symmetric(horizontal: screenSize.width / 36),
+        child: SearchBar(
+          padding: MaterialStateProperty.all(
+            EdgeInsets.symmetric(horizontal: screenSize.width / 36),
+          ),
+          textStyle: MaterialStateProperty.all(
+            TextStyle(
+              fontSize: screenSize.width / 14.4,
+              fontWeight: FontWeight.w500,
+              foreground:
+                  Paint()
+                    ..shader = buttonGradient.createShader(
+                      Rect.fromLTWH(0, 0.0, 140.0, 50),
+                    ),
+            ),
+          ),
+          leading: Icon(
+            CupertinoIcons.search,
+            color: const Color.fromARGB(255, 216, 6, 6),
+            size: screenSize.width / 12,
+          ),
+          hintText: "Search...",
+          hintStyle: MaterialStateProperty.all(
+            TextStyle(color: appWhite(0.6), fontSize: 25),
+          ),
+
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          ),
+          surfaceTintColor: MaterialStateProperty.all(appGrey(0.5)),
+          backgroundColor: MaterialStateProperty.all(appWhite(0.4)),
+          overlayColor: MaterialStateProperty.all(appBlack(0.7)),
+          shadowColor: MaterialStateProperty.all(appBlack(1)),
+
+          onSubmitted: (value) {
+            print(value);
+          },
+        ),
+      ),
+      Container(
+        height: screenSize.height / 1.48,
+        color: appGrey(1),
+        margin: EdgeInsets.all(screenSize.height / 74),
+        child: ListView(),
+      ),
+    ],
+  );
 }

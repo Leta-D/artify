@@ -18,7 +18,10 @@ class CatagoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryNavs = [categoryCollections(context), categorySearch()];
+    final categoryNavs = [
+      categoryCollections(context),
+      categorySearch(context),
+    ];
 
     Size screenSize = MediaQuery.sizeOf(context);
     final appProvider = Provider.of<AppStateProvider>(context);

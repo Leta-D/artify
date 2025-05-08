@@ -1,5 +1,6 @@
 import 'package:artify/app_theme/app_colors.dart';
 import 'package:artify/network_control/network_to_api.dart';
+import 'package:artify/pages/category_listed_image_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,17 @@ Widget catagoryFrames(
   String query,
   BuildContext context,
 ) {
+  // List<String> idList = [];
+  Future<dynamic> fetchDataAndNavigate(String text) async {
+    final idList = await fetchImageCollectionId(text);
+    print("Data: $idList");
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => CategoryListedImagePage(text, idList)),
+    );
+  }
+
   Size screenSize = MediaQuery.sizeOf(context);
   return Container(
     margin: EdgeInsets.all(10),
@@ -19,7 +31,10 @@ Widget catagoryFrames(
     ),
     child: InkWell(
       onTap: () {
-        fetchImageCollectionId(query);
+        fetchDataAndNavigate(text);
+
+        // FutureBuilder(future: future, builder: builder);
+
         print(text);
       },
       child: Stack(

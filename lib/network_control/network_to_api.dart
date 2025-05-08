@@ -34,19 +34,20 @@ Future fetchData(String query, int page) async {
   }
 }
 
-List currentCollectionIds = [];
+List<String> currentCollectionIds = [];
 
-Future fetchImageCollectionId(String query) async {
-  dio.options.queryParameters = {'query': query}; //'per_page': 10
+Future fetchImageCollectionId(String text) async {
+  dio.options.queryParameters = {'query': text}; //'per_page': 10
+  currentCollectionIds.clear();
   try {
     Response response = await dio.get('/search/collections');
 
     if (response.statusCode == 200) {
-      var x;
       for (var item in response.data['results']) {
         currentCollectionIds.add(item['id']);
       }
-      print(currentCollectionIds);
+      // print(currentCollectionIds);
+      return currentCollectionIds;
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");
     }
@@ -56,13 +57,15 @@ Future fetchImageCollectionId(String query) async {
 }
 
 Future fetchImageByCollectionId(String id) async {
-  dio.options.queryParameters = {'per_page': 3}; //'per_page': 10
+  dio.options.queryParameters = {'per_page': 15}; //'per_page': 10
   try {
     Response response = await dio.get('/collections/$id/photos');
-
     if (response.statusCode == 200) {
-      var x;
-      print(response.data);
+      images =
+          (response.data as List)
+              .map((json) => NetworkObject.fromJson(json))
+              .toList();
+      return images;
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");
     }

@@ -29,11 +29,11 @@ Widget homeDashboard(
   });
   return Container(
     margin: EdgeInsets.only(top: 15),
-    padding: EdgeInsets.all(20),
-    width: screenSize.width - 30,
+    padding: EdgeInsets.all(2),
+    width: screenSize.width - 10,
     height: screenSize.height / 3.6,
     decoration: BoxDecoration(
-      color: appWhite(1),
+      color: appBlack(1),
       borderRadius: BorderRadius.all(Radius.circular(10)),
     ),
     child: PageView(

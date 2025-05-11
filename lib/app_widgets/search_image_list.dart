@@ -3,18 +3,18 @@ import 'package:artify/app_widgets/image_frames.dart';
 import 'package:artify/network_control/network_to_api.dart';
 import 'package:flutter/material.dart';
 
-class FutureImagesList extends StatefulWidget {
+class SearchImageList extends StatefulWidget {
   final String title;
   final bool isHome;
-  const FutureImagesList(this.title, this.isHome, {super.key});
+  const SearchImageList(this.title, this.isHome, {super.key});
   @override
-  createState() => _FutureImagesListState(title, isHome);
+  createState() => _SearchImageListState(title, isHome);
 }
 
-class _FutureImagesListState extends State<FutureImagesList> {
+class _SearchImageListState extends State<SearchImageList> {
   final String title;
   bool isHome;
-  _FutureImagesListState(this.title, this.isHome);
+  _SearchImageListState(this.title, this.isHome);
 
   final ScrollController _scrollController = ScrollController();
   // bool isLoading = false;
@@ -50,7 +50,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
     return Scaffold(
       backgroundColor: appBlack(1),
       body: FutureBuilder(
-        future: SearchData(title, counter, isHome),
+        future: SearchData(title, counter, false),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(

@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeNavElements = [
-      futureImagesList(context),
+      FutureImagesList("query", true),
       homeFavorite(),
       homeLocal(),
     ];

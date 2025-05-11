@@ -15,16 +15,26 @@ BaseOptions option = BaseOptions(
 List<NetworkObject> images = [];
 final dio = Dio(option);
 
-Future fetchData(String query, int page) async {
-  dio.options.queryParameters = {'per_page': 18, 'query': query};
+Future SearchData(
+  String text,
+  int pageNo,
+  bool isHome, {
+  int perPage = 24,
+}) async {
+  dio.options.queryParameters = {
+    'per_page': perPage,
+    'query': text,
+    'page': pageNo,
+  };
   try {
-    Response response = await dio.get('/photos');
-
+    Response response = await dio.get((isHome) ? '/photos' : '/search/photos');
+    images.clear();
     if (response.statusCode == 200) {
       images =
-          (response.data as List)
+          (((isHome) ? response.data : response.data['results']) as List)
               .map((json) => NetworkObject.fromJson(json))
               .toList();
+      // print(response.data['results']);
       return images;
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");
@@ -32,7 +42,31 @@ Future fetchData(String query, int page) async {
   } catch (e) {
     print("Error: $e");
   }
+  dio.close();
 }
+
+// Future fetchData(String query, int pageNo, {int perPage = 24}) async {
+//   dio.options.queryParameters = {
+//     'per_page': perPage,
+//     'query': query,
+//     'page': pageNo,
+//   };
+//   try {
+//     Response response = await dio.get('/photos');
+
+//     if (response.statusCode == 200) {
+//       images =
+//           (response.data as List)
+//               .map((json) => NetworkObject.fromJson(json))
+//               .toList();
+//       return images;
+//     } else {
+//       print("Failed to fetch data, Status code: ${response.statusCode}");
+//     }
+//   } catch (e) {
+//     print("Error: $e");
+//   }
+// }
 
 List<String> currentCollectionIds = [];
 

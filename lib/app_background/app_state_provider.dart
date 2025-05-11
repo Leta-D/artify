@@ -35,10 +35,10 @@ class AppStateProvider extends ChangeNotifier {
   }
 
   // --------------------------
-  bool _isLoadingImage = true;
-  get isLoadingImage => _isLoadingImage;
-  void momo(bool value) {
-    _isLoadingImage = value;
+  String _searchText = "Search...";
+  get searchText => _searchText;
+  void changeSearchText(String text) {
+    _searchText = text;
     notifyListeners();
   }
 }

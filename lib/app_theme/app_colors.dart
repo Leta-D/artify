@@ -4,6 +4,9 @@ Color appWhite(double opacity) => Color.fromRGBO(255, 255, 255, opacity);
 Color appGrey(double opacity) => Color.fromRGBO(99, 99, 102, opacity);
 Color appBlack(double opacity) => Color.fromRGBO(16, 16, 16, opacity);
 
+Color appProgressIndicator(double opacity) =>
+    Color.fromRGBO(252, 3, 152, opacity);
+
 Gradient buttonGradient = LinearGradient(
   // begin: Alignment.topLeft,
   // end: Alignment.bottomRight,

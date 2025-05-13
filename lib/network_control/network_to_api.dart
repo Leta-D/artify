@@ -107,3 +107,104 @@ Future fetchImageByCollectionId(String id) async {
     print("Error: $e");
   }
 }
+
+// Future<void> fetchDownloadLocation(String imageId) async {
+//   final dio = Dio();
+//   try {
+//     Response response = await dio.get('/photos/$imageId/download');
+//     if (response.statusCode == 200) {
+//       print(response.data);
+//       // return images;
+//     } else {
+//       print("Failed to fetch data, Status code: ${response.statusCode}");
+//     }
+//   } catch (e) {
+//     print("Error: $e");
+//   }
+// }
+
+Future<String?> fetchDownloadLocation(String photoId) async {
+  final dio = Dio();
+
+  try {
+    final response = await dio.get(
+      photoId,
+      options: Options(
+        headers: {'Authorization': 'Client-ID $apiKey'},
+        followRedirects: false,
+        // validateStatus: (status) => status == 302,
+      ),
+    );
+
+    final redirectedUrl = response.headers.value(
+      'location',
+    ); // Actual image URL
+    print(response.statusCode);
+    // print(response.isRedirect);
+    // dio.download(response.data["url"], "/home/leta/Desktop");
+    // return redirectedUrl;
+  } catch (e) {
+    print('Error fetching image URL: $e');
+    return null;
+  }
+}
+
+// Replace with your Unsplash API Client ID
+// const String unsplashClientId = 'YOUR_UNSPLASH_CLIENT_ID';
+// const String photoId = 'YOUR_PHOTO_ID'; // Example photo ID
+
+Future<void> downloadUnsplashImage(String photoId) async {
+  Dio dio = Dio();
+
+  try {
+    // 1. Get the photo details to access the download URL and download location
+    final photoDetailsResponse = await dio.get(
+      'https://api.unsplash.com/photos/$photoId',
+      options: Options(headers: {'Authorization': 'Client-ID $apiKey'}),
+    );
+
+    if (photoDetailsResponse.statusCode == 200) {
+      final photoData = photoDetailsResponse.data;
+      final downloadUrl = photoData['links']['download'];
+      final downloadLocationUrl = photoData['links']['download_location'];
+
+      print('Download URL: $downloadUrl');
+
+      // 2. Download the image using the download URL
+      final imageResponse = await dio.download(
+        downloadUrl,
+        'unsplash_$photoId.jpg', // Specify the local file path and name
+        onReceiveProgress: (received, total) {
+          if (total != -1) {
+            print('${(received / total * 100).toStringAsFixed(0)}%');
+          }
+        },
+      );
+
+      if (imageResponse.statusCode == 200) {
+        print('Image downloaded successfully to unsplash_$photoId.jpg');
+
+        // 3. Trigger the download location URL to track the download (optional but recommended)
+        try {
+          await dio.get(
+            downloadLocationUrl,
+            options: Options(headers: {'Authorization': 'Client-ID $apiKey'}),
+          );
+          print('Download location tracked.');
+        } catch (e) {
+          print('Error tracking download location: $e');
+        }
+      } else {
+        print('Failed to download image: ${imageResponse.statusCode}');
+        print(imageResponse.data);
+      }
+    } else {
+      print(
+        'Failed to fetch photo details: ${photoDetailsResponse.statusCode}',
+      );
+      print(photoDetailsResponse.data);
+    }
+  } catch (e) {
+    print('An error occurred: $e');
+  }
+}

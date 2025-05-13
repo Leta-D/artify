@@ -24,7 +24,9 @@ Widget imageFrames(BuildContext context, NetworkObject networkObject) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => ImageViewFull(networkObject.rawUrl),
+                builder:
+                    (_) =>
+                        ImageViewFull(networkObject.rawUrl, networkObject.id),
               ),
             );
           },

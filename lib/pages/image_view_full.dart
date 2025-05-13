@@ -1,27 +1,31 @@
 import 'dart:ui';
 
-import 'package:artify/app_background/app_state_provider.dart';
+// import 'package:artify/app_background/app_state_provider.dart';
 import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/network_control/network_object.dart';
-import 'package:artify/network_control/network_to_api.dart';
+import 'package:artify/app_widgets/download_image.dart';
+// import 'package:artify/network_control/network_object.dart';
+// import 'package:artify/network_control/network_to_api.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class ImageViewFull extends StatefulWidget {
   String imageUrl;
-  ImageViewFull(this.imageUrl, {super.key});
+  String imageId = "";
+  ImageViewFull(this.imageUrl, this.imageId, {super.key});
   @override
-  createState() => _ImageViewFullState(imageUrl);
+  createState() => _ImageViewFullState(imageUrl, imageId);
 }
 
 class _ImageViewFullState extends State<ImageViewFull> {
   String imageUrl;
+  String imageId;
+  _ImageViewFullState(this.imageUrl, this.imageId);
+
   bool isVisible = false;
   double posX = 0;
   double posY = 0;
-  _ImageViewFullState(this.imageUrl);
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
@@ -91,15 +95,15 @@ class _ImageViewFullState extends State<ImageViewFull> {
                 posY += details.delta.dy;
               });
             },
-            child: FloatingActionButton(
-              backgroundColor: appBlack(1),
-              foregroundColor: appWhite(1),
-              onPressed: () {
-                fetchImageByCollectionId('1319040');
-                print("Download");
-              },
-              child: Icon(CupertinoIcons.down_arrow),
-            ),
+            child: DownloadImageWidget(unsplashImageUrl: imageId),
+            // child: FloatingActionButton(
+            //   backgroundColor: appBlack(1),
+            //   foregroundColor: appWhite(1),
+            //   onPressed: () {
+            //     print("Download: $downloadUrl");
+            //   },
+            //   child: Icon(CupertinoIcons.down_arrow),
+            // ),
           ),
         ),
         Column(
@@ -123,7 +127,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                           borderRadius: BorderRadius.circular(10),
                           border: Border(
                             top: BorderSide(
-                              color: const Color.fromARGB(255, 247, 62, 6),
+                              color: appProgressIndicator(1),
                               width: 3,
                             ),
                           ),

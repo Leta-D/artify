@@ -14,11 +14,12 @@ Widget catagoryFrames(
   Future<dynamic> fetchDataAndNavigate(String text) async {
     final idList = await fetchImageCollectionId(text);
     print("Data: $idList");
+    return idList;
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => CategoryListedImagePage(text, idList)),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (_) => CategoryListedImagePage(text, idList)),
+    // );
   }
 
   Size screenSize = MediaQuery.sizeOf(context);
@@ -31,9 +32,34 @@ Widget catagoryFrames(
     ),
     child: InkWell(
       onTap: () {
-        fetchDataAndNavigate(text);
+        // fetchDataAndNavigate(text);
 
-        // FutureBuilder(future: future, builder: builder);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder:
+                (_) => FutureBuilder(
+                  future: fetchDataAndNavigate(text),
+                  builder: (_, snapshoot) {
+                    if (snapshoot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        color: appBlack(1),
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          width: 200,
+                          height: 5,
+                          child: LinearProgressIndicator(
+                            color: appProgressIndicator(1),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return CategoryListedImagePage(text, snapshoot.data);
+                    }
+                  },
+                ),
+          ),
+        );
 
         print(text);
       },

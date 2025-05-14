@@ -1,8 +1,8 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/network_control/network_object.dart';
+// import 'package:artify2/app_background/app_state_provider.dart';
+import 'package:artify2/network_control/network_object.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
 
 const apiKey = "DrnfEhU__6t1Tm_cP7jvKg2cph858pOWYDELjLCWBno";
 final apiUrl = 'https://api.unsplash.com';
@@ -147,6 +147,7 @@ Future<String?> fetchDownloadLocation(String photoId) async {
     print('Error fetching image URL: $e');
     return null;
   }
+  return null;
 }
 
 // Replace with your Unsplash API Client ID

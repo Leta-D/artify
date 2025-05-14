@@ -1,11 +1,9 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/app_widgets/future_images_list.dart';
-import 'package:artify/app_widgets/home_dashboard.dart';
-import 'package:artify/app_widgets/home_favorite.dart';
-import 'package:artify/app_widgets/home_local.dart';
-import 'package:artify/app_widgets/image_frames.dart';
-import 'package:artify/app_widgets/main_middel_nav.dart';
+import 'package:artify2/app_background/app_state_provider.dart';
+import 'package:artify2/app_widgets/future_images_list.dart';
+import 'package:artify2/app_widgets/home_dashboard.dart';
+import 'package:artify2/app_widgets/home_favorite.dart';
+import 'package:artify2/app_widgets/home_local.dart';
+import 'package:artify2/app_widgets/main_middel_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

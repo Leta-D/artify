@@ -1,9 +1,8 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/app_widgets/future_images_list.dart';
+import 'package:artify2/app_background/app_state_provider.dart';
+import 'package:artify2/app_theme/app_colors.dart';
+import 'package:artify2/app_widgets/future_images_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 final Map<String, String> unsplashTopics = {
@@ -41,10 +40,10 @@ class CategorySearch extends StatelessWidget {
           margin: EdgeInsets.only(top: screenSize.height / 7.4),
           padding: EdgeInsets.symmetric(horizontal: screenSize.width / 36),
           child: SearchBar(
-            padding: MaterialStateProperty.all(
+            padding: WidgetStateProperty.all(
               EdgeInsets.symmetric(horizontal: screenSize.width / 36),
             ),
-            textStyle: MaterialStateProperty.all(
+            textStyle: WidgetStateProperty.all(
               TextStyle(
                 fontSize: screenSize.width / 14.4,
                 fontWeight: FontWeight.w500,
@@ -61,17 +60,17 @@ class CategorySearch extends StatelessWidget {
               size: screenSize.width / 12,
             ),
             hintText: appProvider.searchText,
-            hintStyle: MaterialStateProperty.all(
+            hintStyle: WidgetStateProperty.all(
               TextStyle(color: appWhite(0.6), fontSize: 25),
             ),
 
-            shape: MaterialStateProperty.all(
+            shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
-            surfaceTintColor: MaterialStateProperty.all(appGrey(0.5)),
-            backgroundColor: MaterialStateProperty.all(appWhite(0.4)),
-            overlayColor: MaterialStateProperty.all(appBlack(0.7)),
-            shadowColor: MaterialStateProperty.all(appBlack(1)),
+            surfaceTintColor: WidgetStateProperty.all(appGrey(0.5)),
+            backgroundColor: WidgetStateProperty.all(appWhite(0.4)),
+            overlayColor: WidgetStateProperty.all(appBlack(0.7)),
+            shadowColor: WidgetStateProperty.all(appBlack(1)),
 
             onSubmitted: (value) {
               appProvider.changeSearchText(value);

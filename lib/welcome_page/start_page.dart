@@ -1,5 +1,5 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_widgets/app_start_bottom.dart';
+import 'package:artify2/app_background/app_state_provider.dart';
+import 'package:artify2/app_widgets/app_start_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

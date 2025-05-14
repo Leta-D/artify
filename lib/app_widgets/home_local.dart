@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -10,6 +9,8 @@ Widget homeLocal() {
 }
 
 class HomeLocal extends StatefulWidget {
+  const HomeLocal({super.key});
+
   @override
   createState() => _HomeLocalState();
 }

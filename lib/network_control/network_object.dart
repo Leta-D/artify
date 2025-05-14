@@ -13,7 +13,7 @@ class NetworkObject {
     return NetworkObject(
       id: json['id'],
       rawUrl: json['urls']['small'], //full better speed
-      downUrl: json['links']['download'],
+      downUrl: json['links']['download_location'],
       likes: json['likes'],
     );
   }

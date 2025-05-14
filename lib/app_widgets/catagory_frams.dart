@@ -1,7 +1,6 @@
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/network_control/network_to_api.dart';
-import 'package:artify/pages/category_listed_image_page.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:artify2/app_theme/app_colors.dart';
+import 'package:artify2/network_control/network_to_api.dart';
+import 'package:artify2/pages/category_listed_image_page.dart';
 import 'package:flutter/material.dart';
 
 Widget catagoryFrames(

@@ -1,5 +1,5 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_theme/app_colors.dart';
+import 'package:artify2/app_background/app_state_provider.dart';
+import 'package:artify2/app_theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,3 +56,19 @@ Widget mainBottomNav(
     ),
   );
 }
+
+
+
+// best way to create button with label and icon in horizontal orentation
+// ElevatedButton.icon(
+//               style: ButtonStyle(
+//                 backgroundColor: WidgetStateProperty.all(appBlack(1)),
+//                 foregroundColor: WidgetStateProperty.all(appWhite(1)),
+//                 alignment: Alignment.center,
+//                 iconAlignment: IconAlignment.end,
+//               ),
+//               onPressed: () {},
+//               icon: Icon("element["icon"]"),
+//               label: Text("element["label"]"),
+//               iconAlignment: IconAlignment.start,
+//             );

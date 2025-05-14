@@ -1,6 +1,6 @@
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/app_widgets/image_frames.dart';
-import 'package:artify/network_control/network_to_api.dart';
+import 'package:artify2/app_theme/app_colors.dart';
+import 'package:artify2/app_widgets/image_frames.dart';
+import 'package:artify2/network_control/network_to_api.dart';
 import 'package:flutter/material.dart';
 
 class FutureImagesList extends StatefulWidget {
@@ -57,7 +57,9 @@ class _FutureImagesListState extends State<FutureImagesList> {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: CircularProgressIndicator(color: appWhite(1)),
+                child: CircularProgressIndicator(
+                  color: appProgressIndicator(1),
+                ),
               ),
             );
           } else {

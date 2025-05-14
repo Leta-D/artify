@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/network_control/network_to_api.dart';
+import 'package:artify2/app_theme/app_colors.dart';
+import 'package:artify2/network_control/network_to_api.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 class DownloadImageWidget extends StatelessWidget {
   final String unsplashImageUrl; // The actual image URL (after redirect)
 
-  DownloadImageWidget({required this.unsplashImageUrl});
+  const DownloadImageWidget({super.key, required this.unsplashImageUrl});
 
   Future<void> downloadImage(BuildContext context) async {
     final status = await Permission.storage.request();

@@ -1,14 +1,10 @@
 import 'dart:ui';
 
-// import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/app_widgets/download_image.dart';
-// import 'package:artify/network_control/network_object.dart';
-// import 'package:artify/network_control/network_to_api.dart';
+import 'package:artify2/app_theme/app_colors.dart';
+import 'package:artify2/app_widgets/download_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
 
 class ImageViewFull extends StatefulWidget {
   String imageUrl;

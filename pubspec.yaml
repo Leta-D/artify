@@ -1,4 +1,4 @@
-name: artify
+name: artify2
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -40,6 +40,7 @@ dependencies:
   permission_handler: ^12.0.0+1
   photo_manager: ^3.6.4
 
+  path_provider: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -84,6 +85,9 @@ flutter:
     - assets/images/collections/colorful.jpg
     - assets/images/collections/motivational.jpg
     - assets/images/collections/space.jpg
+
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

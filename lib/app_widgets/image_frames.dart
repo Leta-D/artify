@@ -1,10 +1,8 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_theme/app_colors.dart';
-import 'package:artify/network_control/network_object.dart';
-import 'package:artify/pages/image_view_full.dart';
+import 'package:artify2/app_theme/app_colors.dart';
+import 'package:artify2/network_control/network_object.dart';
+import 'package:artify2/pages/image_view_full.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 Widget imageFrames(BuildContext context, NetworkObject networkObject) {
   Size screenSize = MediaQuery.sizeOf(context);
@@ -40,7 +38,7 @@ Widget imageFrames(BuildContext context, NetworkObject networkObject) {
                   width: screenSize.width / 6,
                   child: CircularProgressIndicator(
                     value: progress.progress,
-                    color: appWhite(1),
+                    color: appProgressIndicator(1),
                   ),
                 ),
               );

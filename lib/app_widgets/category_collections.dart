@@ -1,4 +1,4 @@
-import 'package:artify/app_widgets/catagory_frams.dart';
+import 'package:artify2/app_widgets/catagory_frams.dart';
 import 'package:flutter/material.dart';
 
 /*

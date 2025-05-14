@@ -1,9 +1,9 @@
-import 'package:artify/app_background/app_state_provider.dart';
-import 'package:artify/app_widgets/main_bottom_nav.dart';
+import 'package:artify2/app_background/app_state_provider.dart';
+import 'package:artify2/app_widgets/main_bottom_nav.dart';
 // import 'package:artify/app_widgets/main_middel_nav.dart';
-import 'package:artify/pages/catagory_page.dart';
-import 'package:artify/pages/home_page.dart';
-import 'package:artify/pages/setting_page.dart';
+import 'package:artify2/pages/catagory_page.dart';
+import 'package:artify2/pages/home_page.dart';
+import 'package:artify2/pages/setting_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

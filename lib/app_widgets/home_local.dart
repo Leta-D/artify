@@ -1,17 +1,13 @@
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/pages/image_view_full.dart';
 import 'package:aaa/pages/image_view_full_local.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 Widget homeLocal() {
   // return Container(child: Text("Home Local"));
-  return ListView(
-    children: [
-      SizedBox(height: 700, child: HomeLocal()),
-      TextButton(onPressed: () {}, child: Text("More...")),
-    ],
-  );
+  return SizedBox(height: 650, child: HomeLocal());
 }
 
 class HomeLocal extends StatefulWidget {
@@ -55,10 +51,7 @@ class _HomeLocalState extends State<HomeLocal> {
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     "Cancel",
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 204, 15, 72),
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(color: appRed(1), fontSize: 18),
                   ),
                 ),
                 TextButton(
@@ -85,11 +78,11 @@ class _HomeLocalState extends State<HomeLocal> {
       type: RequestType.image,
       onlyAll: true,
     );
-
     if (albums.isNotEmpty) {
+      int count = await albums[0].assetCountAsync;
       final List<AssetEntity> media = await albums[0].getAssetListPaged(
         page: 0,
-        size: 50, // increase size to get more images
+        size: count, // increase size to get more images
       );
 
       setState(() {
@@ -139,6 +132,70 @@ class _HomeLocalState extends State<HomeLocal> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: InkWell(
+                              onLongPress: () {
+                                showDialog(
+                                  context: context,
+                                  builder:
+                                      (_) => AlertDialog(
+                                        backgroundColor: appBlack(0.9),
+                                        title: Icon(
+                                          CupertinoIcons.delete_solid,
+                                          size: 40,
+                                          color: appRed(1),
+                                        ),
+                                        content: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 80,
+                                          ),
+                                          child: Text(
+                                            "Delete photo!",
+                                            style: TextStyle(
+                                              color: appWhite(1),
+                                            ),
+                                          ),
+                                        ),
+                                        actionsAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () async {
+                                              await PhotoManager.editor
+                                                  .deleteWithIds([
+                                                    images[index].id,
+                                                  ]);
+                                              setState(() {
+                                                Navigator.pop(context);
+                                              });
+                                            },
+                                            child: Text(
+                                              "Delete",
+                                              style: TextStyle(
+                                                color: appRed(1),
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  WidgetStatePropertyAll(
+                                                    appRed(1),
+                                                  ),
+                                            ),
+                                            onPressed:
+                                                () => Navigator.pop(context),
+                                            child: Text(
+                                              "Cancel",
+                                              style: TextStyle(
+                                                color: appWhite(1),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                );
+                              },
                               onTap: () {
                                 Navigator.push(
                                   context,

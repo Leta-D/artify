@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageViewFullLocal extends StatefulWidget {
   Uint8List imageLoc;
@@ -19,6 +20,49 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
   Uint8List imageLoc;
   AssetEntity imageFile;
   _ImageViewFullLocalState(this.imageLoc, this.imageFile);
+
+  Future<void> setImageAsWallpaper(AssetEntity imageFile, int location) async {
+    final fileLoc = await imageFile.file;
+
+    if (fileLoc == null) {
+      print("can't get the image use ui to show to user");
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              title: Icon(
+                CupertinoIcons.clear_circled,
+                color: appRed(1),
+                size: 40,
+              ),
+            ),
+      );
+      return;
+    }
+
+    // int location = WallpaperManagerFlutter.homeScreen;
+    try {
+      final result = await WallpaperManagerFlutter().setWallpaper(
+        imageFile,
+        location,
+      );
+      if (result) {
+        showDialog(
+          context: context,
+          builder:
+              (_) => AlertDialog(
+                title: Icon(
+                  CupertinoIcons.check_mark_circled,
+                  color: const Color.fromARGB(255, 57, 255, 7),
+                  size: 40,
+                ),
+              ),
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   bool isVisible = false;
   double posX = 0;

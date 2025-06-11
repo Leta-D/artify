@@ -122,7 +122,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
                       onPressed: () {
                         setState(() {});
                       },
-                      icon: Icon(CupertinoIcons.refresh),
+                      icon: Icon(CupertinoIcons.refresh, color: appWhite(1)),
                     ),
                   ],
                 ),

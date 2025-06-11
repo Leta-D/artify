@@ -533,14 +533,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.3.1"
-  wallpaper_manager_plus:
-    dependency: "direct main"
-    description:
-      name: wallpaper_manager_plus
-      sha256: bc407eeed8576b43fb6d51b7807adf61bc5ef953375ea8510cf619738bafb38f
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   web:
     dependency: transitive
     description:

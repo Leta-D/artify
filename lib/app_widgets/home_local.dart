@@ -6,7 +6,12 @@ import 'package:photo_manager/photo_manager.dart';
 
 Widget homeLocal() {
   // return Container(child: Text("Home Local"));
-  return HomeLocal();
+  return ListView(
+    children: [
+      SizedBox(height: 700, child: HomeLocal()),
+      TextButton(onPressed: () {}, child: Text("More...")),
+    ],
+  );
 }
 
 class HomeLocal extends StatefulWidget {
@@ -105,8 +110,8 @@ class _HomeLocalState extends State<HomeLocal> {
                   color: appProgressIndicator(1),
                 ),
               )
-              : SizedBox(
-                height: screenSize.height - 150,
+              : Padding(
+                padding: EdgeInsets.only(bottom: 10),
                 child: GridView.builder(
                   itemCount: images.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -106,6 +106,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
             } else {
               return Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Content can't be loaded please\n  CHECK YOUR NETWORK !",

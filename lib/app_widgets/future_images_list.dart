@@ -42,7 +42,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
   @override
   void dispose() {
     _scrollController.dispose();
-    // super.dispose();
+    super.dispose();
   }
 
   @override

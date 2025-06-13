@@ -26,7 +26,7 @@ Widget catagoryFrames(
     margin: EdgeInsets.all(10),
     padding: EdgeInsets.all(5),
     decoration: BoxDecoration(
-      color: appWhite(0.2),
+      color: appWhite(0.2, context),
       borderRadius: BorderRadius.circular(15),
     ),
     child: InkWell(
@@ -42,7 +42,7 @@ Widget catagoryFrames(
                   builder: (_, snapshoot) {
                     if (snapshoot.connectionState == ConnectionState.waiting) {
                       return Container(
-                        color: appBlack(1),
+                        color: appBlack(1, context),
                         alignment: Alignment.center,
                         child: SizedBox(
                           width: 200,

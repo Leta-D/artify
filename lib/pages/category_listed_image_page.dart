@@ -67,10 +67,10 @@ class _CategoryListedImagePageState extends State<CategoryListedImagePage> {
                   Rect.fromLTWH(0, 0.0, 220.0, 50),
                 ),
         ),
-        backgroundColor: appBlack(0.9),
-        foregroundColor: appWhite(1),
+        backgroundColor: appBlack(0.9, context),
+        foregroundColor: appWhite(1, context),
       ),
-      backgroundColor: appBlack(1),
+      backgroundColor: appBlack(1, context),
       body:
           allRelatedCollectionId == null
               ? Center(
@@ -105,7 +105,7 @@ class _CategoryListedImagePageState extends State<CategoryListedImagePage> {
                     if (snapshot.hasData) {
                       allImages += snapshot.data;
                       return Container(
-                        color: appBlack(1),
+                        color: appBlack(1, context),
                         child: ListView(
                           controller: _scrollController,
                           children: [

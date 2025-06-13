@@ -61,16 +61,16 @@ class CategorySearch extends StatelessWidget {
             ),
             hintText: appProvider.searchText,
             hintStyle: WidgetStateProperty.all(
-              TextStyle(color: appWhite(0.6), fontSize: 25),
+              TextStyle(color: appWhite(0.6, context), fontSize: 25),
             ),
 
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
             surfaceTintColor: WidgetStateProperty.all(appGrey(0.5)),
-            backgroundColor: WidgetStateProperty.all(appWhite(0.4)),
-            overlayColor: WidgetStateProperty.all(appBlack(0.7)),
-            shadowColor: WidgetStateProperty.all(appBlack(1)),
+            backgroundColor: WidgetStateProperty.all(appWhite(0.4, context)),
+            overlayColor: WidgetStateProperty.all(appBlack(0.7, context)),
+            shadowColor: WidgetStateProperty.all(appBlack(1, context)),
 
             onSubmitted: (value) {
               appProvider.changeSearchText(value);

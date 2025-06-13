@@ -18,7 +18,7 @@ Widget mainMiddelNav(
     margin: EdgeInsets.all(screenSize.width / 20.6),
     height: screenSize.height / 10.7,
     decoration: BoxDecoration(
-      color: appBlack(1),
+      color: appBlack(1, context),
       borderRadius: BorderRadius.circular(screenSize.width / 13.7),
     ),
     child: Row(
@@ -56,7 +56,7 @@ Widget mainMiddelNav(
                     size: screenSize.width / 13.7,
                     color:
                         (currentIndex == elements.indexOf(element))
-                            ? appWhite(1)
+                            ? appWhite(1, context)
                             : appGrey(1),
                   ),
                   Text(
@@ -66,7 +66,7 @@ Widget mainMiddelNav(
                       fontWeight: FontWeight.bold,
                       color:
                           (currentIndex == elements.indexOf(element))
-                              ? appWhite(1)
+                              ? appWhite(1, context)
                               : appGrey(1),
                     ),
                   ),

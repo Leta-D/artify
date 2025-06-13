@@ -1,8 +1,28 @@
+import 'package:aaa/app_background/app_state_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-Color appWhite(double opacity) => Color.fromRGBO(255, 255, 255, opacity);
+bool darkMode = true;
+
+void setApearaceMode(BuildContext context) {
+  final appProvider = Provider.of<AppStateProvider>(context);
+  darkMode = appProvider.appearanceMode;
+}
+
+Color appWhite(double opacity, BuildContext context) {
+  final appProvider = Provider.of<AppStateProvider>(context);
+  return appProvider.appearanceMode
+      ? Color.fromRGBO(255, 255, 255, opacity)
+      : Color.fromRGBO(16, 16, 16, opacity);
+}
+
 Color appGrey(double opacity) => Color.fromRGBO(99, 99, 102, opacity);
-Color appBlack(double opacity) => Color.fromRGBO(16, 16, 16, opacity);
+Color appBlack(double opacity, BuildContext context) {
+  final appProvider = Provider.of<AppStateProvider>(context);
+  return appProvider.appearanceMode
+      ? Color.fromRGBO(16, 16, 16, opacity)
+      : Color.fromRGBO(255, 255, 255, opacity);
+}
 
 Color appRed(double opaciy) => Color.fromRGBO(204, 15, 72, opaciy);
 

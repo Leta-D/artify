@@ -49,7 +49,7 @@ class _SearchImageListState extends State<SearchImageList> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: appBlack(1),
+      backgroundColor: appBlack(1, context),
       body: FutureBuilder(
         future: searchData(title, counter, false),
         builder: (context, snapshot) {
@@ -58,14 +58,14 @@ class _SearchImageListState extends State<SearchImageList> {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: CircularProgressIndicator(color: appWhite(1)),
+                child: CircularProgressIndicator(color: appWhite(1, context)),
               ),
             );
           } else {
             if (snapshot.hasData) {
               allImages += snapshot.data;
               return Container(
-                color: appBlack(1),
+                color: appBlack(1, context),
                 child: ListView(
                   controller: _scrollController,
                   children: [
@@ -101,7 +101,10 @@ class _SearchImageListState extends State<SearchImageList> {
                       onPressed: () {
                         setState(() {});
                       },
-                      icon: Icon(CupertinoIcons.refresh, color: appWhite(1)),
+                      icon: Icon(
+                        CupertinoIcons.refresh,
+                        color: appWhite(1, context),
+                      ),
                     ),
                   ],
                 ),

@@ -86,6 +86,7 @@ flutter:
     - assets/images/collections/colorful.jpg
     - assets/images/collections/motivational.jpg
     - assets/images/collections/space.jpg
+    - assets/icons/instagram_icon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

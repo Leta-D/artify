@@ -49,7 +49,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: appBlack(1),
+      backgroundColor: appBlack(1, context),
       body: FutureBuilder(
         future: searchData(title, counter, isHome),
         builder: (context, snapshot) {
@@ -67,7 +67,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
             if (snapshot.hasData) {
               allImages += snapshot.data;
               return Container(
-                color: appBlack(1),
+                color: appBlack(1, context),
                 child: ListView(
                   controller: _scrollController,
                   children: [
@@ -86,7 +86,7 @@ class _FutureImagesListState extends State<FutureImagesList> {
               );
             } else if (allImages.isNotEmpty) {
               return Container(
-                color: appBlack(1),
+                color: appBlack(1, context),
                 child: ListView(
                   controller: _scrollController,
                   children: [
@@ -123,7 +123,10 @@ class _FutureImagesListState extends State<FutureImagesList> {
                       onPressed: () {
                         setState(() {});
                       },
-                      icon: Icon(CupertinoIcons.refresh, color: appWhite(1)),
+                      icon: Icon(
+                        CupertinoIcons.refresh,
+                        color: appWhite(1, context),
+                      ),
                     ),
                   ],
                 ),

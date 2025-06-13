@@ -52,8 +52,8 @@ class DownloadImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: appBlack(1),
-      foregroundColor: appWhite(1),
+      backgroundColor: appBlack(1, context),
+      foregroundColor: appWhite(1, context),
       onPressed: () {
         // print("Download: $unsplashImageUrl");
         downloadImage(context);

@@ -53,7 +53,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
         context: context,
         builder:
             (_) => AlertDialog(
-              backgroundColor: appBlack(0.8),
+              backgroundColor: appBlack(0.8, context),
               title: Icon(
                 result
                     ? CupertinoIcons.check_mark_circled
@@ -68,7 +68,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                   result
                       ? "Wallpaper successfully set!"
                       : " Wallpaper failure!",
-                  style: TextStyle(color: appWhite(1), fontSize: 16),
+                  style: TextStyle(color: appWhite(1, context), fontSize: 16),
                 ),
               ),
               actionsAlignment: MainAxisAlignment.center,
@@ -81,7 +81,10 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },
-                  child: Text("OK", style: TextStyle(color: appWhite(1))),
+                  child: Text(
+                    "OK",
+                    style: TextStyle(color: appWhite(1, context)),
+                  ),
                 ),
               ],
             ),
@@ -148,13 +151,17 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
             alignment: Alignment.topLeft,
             child: IconButton(
               style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(appWhite(0.1)),
+                backgroundColor: WidgetStatePropertyAll(appWhite(0.1, context)),
               ),
               padding: EdgeInsets.all(8.0),
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(CupertinoIcons.back, size: 30.0, color: appBlack(1)),
+              icon: Icon(
+                CupertinoIcons.back,
+                size: 30.0,
+                color: appBlack(1, context),
+              ),
             ),
           ),
 
@@ -200,7 +207,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                               child: Text(
                                 "Lock Screen",
                                 style: TextStyle(
-                                  color: appWhite(1),
+                                  color: appWhite(1, context),
                                   fontSize: screenSize.height / 45,
                                 ),
                               ),
@@ -215,7 +222,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                               child: Text(
                                 "Home Screen",
                                 style: TextStyle(
-                                  color: appWhite(1),
+                                  color: appWhite(1, context),
                                   fontSize: screenSize.height / 45,
                                 ),
                               ),
@@ -229,7 +236,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                               child: Text(
                                 "Both",
                                 style: TextStyle(
-                                  color: appWhite(1),
+                                  color: appWhite(1, context),
                                   fontSize: screenSize.height / 45,
                                 ),
                               ),
@@ -270,7 +277,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                             !isVisible ? "Set as" : "Cancel",
                             style: TextStyle(
                               fontSize: screenSize.height / 36.6,
-                              color: appWhite(1),
+                              color: appWhite(1, context),
                             ),
                           ),
                         ),

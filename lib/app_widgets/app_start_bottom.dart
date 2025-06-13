@@ -12,8 +12,8 @@ Widget appStartBottom(BuildContext context, List<Map<String, String>> bottoms) {
     width: screenSize.width,
     height: screenSize.height / 4.2,
     decoration: BoxDecoration(
-      color: appBlack(1),
-      border: Border.all(color: appBlack(0.7), width: 1),
+      color: appBlack(1, context),
+      border: Border.all(color: appBlack(0.7, context), width: 1),
       borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
     ),
     child: Flex(
@@ -22,7 +22,7 @@ Widget appStartBottom(BuildContext context, List<Map<String, String>> bottoms) {
         Text(
           bottoms[appStateProvider.startBottomIndex]["title"]!,
           style: TextStyle(
-            color: appWhite(1),
+            color: appWhite(1, context),
             fontSize: screenSize.height / 30.5,
           ),
         ),
@@ -32,7 +32,7 @@ Widget appStartBottom(BuildContext context, List<Map<String, String>> bottoms) {
             bottoms[appStateProvider.startBottomIndex]["message"]!,
             style: TextStyle(
               fontSize: screenSize.height / 50.83,
-              color: appWhite(1),
+              color: appWhite(1, context),
             ),
             softWrap: true,
           ),
@@ -53,7 +53,7 @@ Widget appStartBottom(BuildContext context, List<Map<String, String>> bottoms) {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               gradient: buttonGradient,
-              border: Border.all(color: appBlack(1)),
+              border: Border.all(color: appBlack(1, context)),
               borderRadius: BorderRadius.circular(screenSize.height / 30.5),
             ),
             child: Row(
@@ -62,11 +62,11 @@ Widget appStartBottom(BuildContext context, List<Map<String, String>> bottoms) {
                 Text(
                   bottoms[appStateProvider.startBottomIndex]["buttonText"]!,
                   style: TextStyle(
-                    color: appWhite(1),
+                    color: appWhite(1, context),
                     fontSize: screenSize.height / 36.6,
                   ),
                 ),
-                Icon(CupertinoIcons.arrow_right, color: appWhite(1)),
+                Icon(CupertinoIcons.arrow_right, color: appWhite(1, context)),
               ],
             ),
           ),

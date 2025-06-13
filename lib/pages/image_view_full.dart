@@ -58,7 +58,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                   child: SizedBox(
                     child: CircularProgressIndicator(
                       value: progress.progress,
-                      color: appWhite(1),
+                      color: appWhite(1, context),
                     ),
                   ),
                 );
@@ -73,13 +73,17 @@ class _ImageViewFullState extends State<ImageViewFull> {
             alignment: Alignment.topLeft,
             child: IconButton(
               style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(appWhite(0.1)),
+                backgroundColor: WidgetStatePropertyAll(appWhite(0.1, context)),
               ),
               padding: EdgeInsets.all(8.0),
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(CupertinoIcons.back, size: 30.0, color: appBlack(1)),
+              icon: Icon(
+                CupertinoIcons.back,
+                size: 30.0,
+                color: appBlack(1, context),
+              ),
             ),
           ),
           Positioned(
@@ -141,7 +145,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                               child: Text(
                                 "Lock Screen",
                                 style: TextStyle(
-                                  color: appWhite(1),
+                                  color: appWhite(1, context),
                                   fontSize: screenSize.height / 45,
                                 ),
                               ),
@@ -152,7 +156,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                               child: Text(
                                 "Home Screen",
                                 style: TextStyle(
-                                  color: appWhite(1),
+                                  color: appWhite(1, context),
                                   fontSize: screenSize.height / 45,
                                 ),
                               ),
@@ -163,7 +167,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                               child: Text(
                                 "Both",
                                 style: TextStyle(
-                                  color: appWhite(1),
+                                  color: appWhite(1, context),
                                   fontSize: screenSize.height / 45,
                                 ),
                               ),
@@ -205,7 +209,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                             !isVisible ? "Set as" : "Cancel",
                             style: TextStyle(
                               fontSize: screenSize.height / 36.6,
-                              color: appWhite(1),
+                              color: appWhite(1, context),
                             ),
                           ),
                         ),

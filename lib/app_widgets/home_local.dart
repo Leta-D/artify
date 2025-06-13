@@ -33,17 +33,17 @@ class _HomeLocalState extends State<HomeLocal> {
         context: context,
         builder:
             (_) => AlertDialog(
-              backgroundColor: appBlack(0.9),
+              backgroundColor: appBlack(0.9, context),
               title: Text(
                 "Permission Required",
                 style: TextStyle(
-                  color: appWhite(1),
+                  color: appWhite(1, context),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               content: Text(
                 "Please allow permission to access photo from settings.",
-                style: TextStyle(color: appWhite(1)),
+                style: TextStyle(color: appWhite(1, context)),
               ),
               actions: [
                 TextButton(
@@ -94,7 +94,7 @@ class _HomeLocalState extends State<HomeLocal> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: appBlack(1),
+      backgroundColor: appBlack(1, context),
       body:
           images.isEmpty
               ? Center(
@@ -136,7 +136,7 @@ class _HomeLocalState extends State<HomeLocal> {
                                   context: context,
                                   builder:
                                       (_) => AlertDialog(
-                                        backgroundColor: appBlack(0.9),
+                                        backgroundColor: appBlack(0.9, context),
                                         title: Icon(
                                           CupertinoIcons.delete_solid,
                                           size: 40,
@@ -149,7 +149,7 @@ class _HomeLocalState extends State<HomeLocal> {
                                           child: Text(
                                             "Delete photo!",
                                             style: TextStyle(
-                                              color: appWhite(1),
+                                              color: appWhite(1, context),
                                             ),
                                           ),
                                         ),
@@ -186,7 +186,7 @@ class _HomeLocalState extends State<HomeLocal> {
                                             child: Text(
                                               "Cancel",
                                               style: TextStyle(
-                                                color: appWhite(1),
+                                                color: appWhite(1, context),
                                                 fontSize: 16,
                                               ),
                                             ),

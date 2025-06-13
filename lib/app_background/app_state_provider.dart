@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class AppStateProvider extends ChangeNotifier {
@@ -38,6 +37,15 @@ class AppStateProvider extends ChangeNotifier {
   get searchText => _searchText;
   void changeSearchText(String text) {
     _searchText = text;
+    notifyListeners();
+  }
+
+  // App Dark/Light mode handeler
+  bool _darkMode = true; // -1 dark, 0 system, 1 light
+  get appearanceMode => _darkMode;
+
+  void changeAppearanceMode(bool mode) {
+    _darkMode = mode;
     notifyListeners();
   }
 }

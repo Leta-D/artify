@@ -1,4 +1,5 @@
 import 'package:aaa/app_background/app_state_provider.dart';
+import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/app_widgets/main_bottom_nav.dart';
 // import 'package:aaa/app_widgets/main_middel_nav.dart';
 import 'package:aaa/pages/catagory_page.dart';
@@ -21,7 +22,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppStateProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: appBlack(1, context),
       body: SafeArea(
         child: Stack(
           children: [

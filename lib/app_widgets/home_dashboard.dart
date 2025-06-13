@@ -31,7 +31,7 @@ Widget homeDashboard(
     width: screenSize.width - 10,
     height: screenSize.height / 3.6,
     decoration: BoxDecoration(
-      color: appBlack(1),
+      color: appBlack(1, context),
       borderRadius: BorderRadius.all(Radius.circular(10)),
     ),
     child: PageView(

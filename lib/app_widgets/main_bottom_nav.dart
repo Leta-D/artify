@@ -13,7 +13,7 @@ Widget mainBottomNav(
     alignment: Alignment.bottomCenter,
     child: Container(
       height: screenSize.height / 11,
-      color: appBlack(1),
+      color: appBlack(1, context),
       padding: EdgeInsets.symmetric(vertical: screenSize.height / 91),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -33,7 +33,7 @@ Widget mainBottomNav(
                     color:
                         (appStateProvider.mainBottomNavIndex ==
                                 elements.indexOf(element))
-                            ? appWhite(1)
+                            ? appWhite(1, context)
                             : appGrey(1),
                     size: screenSize.height / 30.5,
                   ),
@@ -43,7 +43,7 @@ Widget mainBottomNav(
                       color:
                           (appStateProvider.mainBottomNavIndex ==
                                   elements.indexOf(element))
-                              ? appWhite(1)
+                              ? appWhite(1, context)
                               : appGrey(1),
                       fontSize: screenSize.height / 57,
                     ),

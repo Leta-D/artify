@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:aaa/app_theme/app_colors.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
-// import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageViewFullLocal extends StatefulWidget {
   Uint8List imageLoc;
@@ -21,48 +20,76 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
   AssetEntity imageFile;
   _ImageViewFullLocalState(this.imageLoc, this.imageFile);
 
-  // Future<void> setImageAsWallpaper(AssetEntity imageFile, int location) async {
-  //   final fileLoc = await imageFile.file;
+  Future<void> setImageAsWallpaper(int location) async {
+    final fileLoc = await imageFile.file;
 
-  //   if (fileLoc == null) {
-  //     print("can't get the image use ui to show to user");
-  //     showDialog(
-  //       context: context,
-  //       builder:
-  //           (_) => AlertDialog(
-  //             title: Icon(
-  //               CupertinoIcons.clear_circled,
-  //               color: appRed(1),
-  //               size: 40,
-  //             ),
-  //           ),
-  //     );
-  //     return;
-  //   }
+    if (fileLoc == null) {
+      print("can't get the image use ui to show to user");
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              title: Icon(
+                CupertinoIcons.clear_circled,
+                color: appRed(1),
+                size: 40,
+              ),
+              content: Text(
+                "Can't get the image, try agin!",
+                style: TextStyle(color: appRed(1)),
+              ),
+            ),
+      );
+      return;
+    }
 
-  //   // int location = WallpaperManagerFlutter.homeScreen;
-  //   try {
-  //     final result = await WallpaperManagerFlutter().setWallpaper(
-  //       imageFile,
-  //       location,
-  //     );
-  //     if (result) {
-  //       showDialog(
-  //         context: context,
-  //         builder:
-  //             (_) => AlertDialog(
-  //               title: Icon(
-  //                 CupertinoIcons.check_mark_circled,
-  //                 color: const Color.fromARGB(255, 57, 255, 7),
-  //                 size: 40,
-  //               ),
-  //             ),
-  //       );
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+    // int location = WallpaperManagerFlutter.homeScreen;
+    try {
+      final result = await WallpaperManagerFlutter().setWallpaper(
+        fileLoc,
+        location,
+      );
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: appBlack(0.8),
+              title: Icon(
+                result
+                    ? CupertinoIcons.check_mark_circled
+                    : CupertinoIcons.clear_circled,
+                color:
+                    result ? const Color.fromARGB(255, 57, 255, 7) : appRed(1),
+                size: 40,
+              ),
+              content: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  result
+                      ? "Wallpaper successfully set!"
+                      : " Wallpaper failure!",
+                  style: TextStyle(color: appWhite(1), fontSize: 16),
+                ),
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(appRed(1)),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK", style: TextStyle(color: appWhite(1))),
+                ),
+              ],
+            ),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 
   bool isVisible = false;
   double posX = 0;
@@ -165,7 +192,11 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setImageAsWallpaper(
+                                  WallpaperManagerFlutter.lockScreen,
+                                );
+                              },
                               child: Text(
                                 "Lock Screen",
                                 style: TextStyle(
@@ -176,7 +207,11 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                             ),
                             // Spacer(),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setImageAsWallpaper(
+                                  WallpaperManagerFlutter.homeScreen,
+                                );
+                              },
                               child: Text(
                                 "Home Screen",
                                 style: TextStyle(
@@ -185,9 +220,12 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                                 ),
                               ),
                             ),
-                            // Spacer(),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setImageAsWallpaper(
+                                  WallpaperManagerFlutter.bothScreens,
+                                );
+                              },
                               child: Text(
                                 "Both",
                                 style: TextStyle(
@@ -217,7 +255,6 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Set wallpeper");
                         setState(() {
                           isVisible = !isVisible;
                         });

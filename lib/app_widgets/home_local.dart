@@ -1,5 +1,4 @@
 import 'package:aaa/app_theme/app_colors.dart';
-import 'package:aaa/pages/image_view_full.dart';
 import 'package:aaa/pages/image_view_full_local.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

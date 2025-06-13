@@ -7,9 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ImageViewFull extends StatefulWidget {
-  String imageUrl;
-  String imageId = "";
-  ImageViewFull(this.imageUrl, this.imageId, {super.key});
+  final String imageUrl;
+  final String imageId;
+  const ImageViewFull(this.imageUrl, this.imageId, {super.key});
   @override
   createState() => _ImageViewFullState(imageUrl, imageId);
 }

@@ -48,4 +48,13 @@ class AppStateProvider extends ChangeNotifier {
     _darkMode = mode;
     notifyListeners();
   }
+
+  // app vibration controller
+  bool _appVibration = true;
+  get appVibration => _appVibration;
+
+  void changeAppVibration(bool mode) {
+    _appVibration = mode;
+    notifyListeners();
+  }
 }

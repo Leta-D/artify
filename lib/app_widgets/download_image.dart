@@ -14,9 +14,9 @@ class DownloadImageWidget extends StatelessWidget {
     print("Hello");
     final status = await Permission.storage.request();
     if (!status.isGranted) {
-      // ScaffoldMessenger.of(
-      //   context,
-      // ).showSnackBar(SnackBar(content: Text('Storage permission denied')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Storage permission denied')));
       return;
     }
 
@@ -31,21 +31,21 @@ class DownloadImageWidget extends StatelessWidget {
                 'Client-ID DrnfEhU__6t1Tm_cP7jvKg2cph858pOWYDELjLCWBno',
           },
           responseType: ResponseType.bytes,
-          // followRedirects: false,
+          followRedirects: false,
           // validateStatus: (status) => status == 302,
         ),
       );
       if (response.statusCode == 200) {
         // Uint8List imageBytes = response.data;
 
-        // ScaffoldMessenger.of(
-        //   context,
-        // ).showSnackBar(SnackBar(content: Text('Downloaded to ')));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Downloaded to ')));
       }
     } catch (e) {
-      // ScaffoldMessenger.of(
-      //   context,
-      // ).showSnackBar(SnackBar(content: Text('Download failed: $e')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Download failed: $e')));
     }
   }
 

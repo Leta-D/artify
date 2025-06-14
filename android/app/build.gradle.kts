@@ -7,6 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.aaa"
+    // namespace = "com.image_gallery_saver"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "29.0.13113456"
 

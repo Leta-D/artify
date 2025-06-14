@@ -1,20 +1,6 @@
 import 'package:aaa/app_widgets/catagory_frams.dart';
 import 'package:flutter/material.dart';
 
-/*
-- assets/images/collections/abstract.jpg
-    - assets/images/collections/animals.jpg
-    - assets/images/collections/archetecture.jpg
-    - assets/images/collections/blackAndWhite.jpg
-    - assets/images/collections/cars.jpg
-    - assets/images/collections/city.jpg
-    - assets/images/collections/fantacy.jpg
-    - assets/images/collections/forest.jpg
-    - assets/images/collections/nature.jpg
-    - assets/images/collections/technology.jpg
-    - assets/images/collections/underWater.jpg
-*/
-
 final collectionElements = [
   {
     "text": "Nature",

@@ -97,14 +97,6 @@ class _ImageViewFullState extends State<ImageViewFull> {
                 });
               },
               child: DownloadImageWidget(unsplashImageUrl: imageUrl),
-              // child: FloatingActionButton(
-              //   backgroundColor: appBlack(1),
-              //   foregroundColor: appWhite(1),
-              //   onPressed: () {
-              //     print("Download: $downloadUrl");
-              //   },
-              //   child: Icon(CupertinoIcons.down_arrow),
-              // ),
             ),
           ),
           Column(

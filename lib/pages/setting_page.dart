@@ -154,6 +154,47 @@ class SettingPage extends StatelessWidget {
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "ENABLE VIBRATION",
+                        style: TextStyle(
+                          color: appWhite(0.8, context),
+                          fontSize: 18,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                      Switch(
+                        value: appProvider.appVibration,
+                        onChanged: (value) {
+                          appProvider.changeAppVibration(
+                            !appProvider.appVibration,
+                          );
+                        },
+                        activeColor: appBlack(1, context),
+                        inactiveThumbColor: appProgressIndicator(1),
+                        activeTrackColor: appProgressIndicator(0.7),
+                        inactiveTrackColor: const Color.fromARGB(
+                          255,
+                          165,
+                          160,
+                          158,
+                        ),
+                        trackOutlineColor: WidgetStatePropertyAll(
+                          Colors.transparent,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(height: 1, color: appGrey(0.5)),
+                ],
+              ),
+            ),
             InkWell(
               splashColor: Colors.transparent,
               onTap:
@@ -187,6 +228,7 @@ class SettingPage extends StatelessWidget {
                 ),
               ),
             ),
+
             textWithUnderline("CONTACT DEVELOPER"),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 50),

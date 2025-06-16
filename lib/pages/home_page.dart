@@ -1,7 +1,7 @@
 import 'package:aaa/app_background/app_state_provider.dart';
 import 'package:aaa/app_widgets/future_images_list.dart';
 import 'package:aaa/app_widgets/home_dashboard.dart';
-import 'package:aaa/app_widgets/home_favorite.dart';
+import 'package:aaa/app_widgets/home_downloaded.dart';
 import 'package:aaa/app_widgets/home_local.dart';
 import 'package:aaa/app_widgets/main_middel_nav.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeNavElements = [
       FutureImagesList("query", true),
-      homeFavorite(),
+      homeDownloaded(),
       homeLocal(),
     ];
     final screenSize = MediaQuery.sizeOf(context);

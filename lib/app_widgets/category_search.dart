@@ -74,7 +74,7 @@ class CategorySearch extends StatelessWidget {
 
             onSubmitted: (value) {
               appProvider.changeSearchText(value);
-              print(value);
+              // print(value);
             },
           ),
         ),

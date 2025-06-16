@@ -138,7 +138,7 @@ Future<String?> fetchDownloadLocation(String photoId) async {
     // final redirectedUrl = response.headers.value(
     //   'location',
     // ); // Actual image URL
-    print(response.statusCode);
+    // print(response.statusCode);
     // print(response.isRedirect);
     // dio.download(response.data["url"], "/home/leta/Desktop");
     // return redirectedUrl;

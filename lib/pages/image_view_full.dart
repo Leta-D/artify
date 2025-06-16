@@ -1,27 +1,283 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/app_widgets/download_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageViewFull extends StatefulWidget {
-  final String imageUrl;
-  final String imageId;
-  const ImageViewFull(this.imageUrl, this.imageId, {super.key});
+  final String imageFullUrl;
+  final String imageSmallUrl;
+  const ImageViewFull(this.imageFullUrl, this.imageSmallUrl, {super.key});
   @override
-  createState() => _ImageViewFullState(imageUrl, imageId);
+  createState() => _ImageViewFullState(imageFullUrl, imageSmallUrl);
 }
 
 class _ImageViewFullState extends State<ImageViewFull> {
-  String imageUrl;
-  String imageId; // instad use full to download no id needed
-  _ImageViewFullState(this.imageUrl, this.imageId);
+  String imageFullUrl;
+  String imageSmallUrl; // instad use full to download no id needed
+  _ImageViewFullState(this.imageFullUrl, this.imageSmallUrl);
 
   bool isVisible = false;
   double posX = 0;
   double posY = 0;
+
+  Future<Directory> getDownloadDirectory() async {
+    Directory? extDir = Directory('/storage/emulated/0/Download/ArtifyImages');
+    if (!await extDir.exists()) {
+      await extDir.create(recursive: true);
+    }
+    return extDir;
+  }
+
+  Future<void> downloadImageAndSetWallpaper(
+    String imageUrl,
+    int location,
+  ) async {
+    try {
+      final status = await Permission.manageExternalStorage.request();
+
+      if (status.isDenied) {
+        showDialog(
+          context: context,
+          builder:
+              (_) => AlertDialog(
+                backgroundColor: appBlack(0.9, context),
+                title: Text(
+                  "Permission Required",
+                  style: TextStyle(
+                    color: appWhite(1, context),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: Text(
+                  "Please allow permission to access storage in settings.",
+                  style: TextStyle(color: appWhite(1, context)),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(color: appRed(1), fontSize: 18),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      openAppSettings();
+                    },
+                    child: Text(
+                      "Open Settings",
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 7, 114, 255),
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+        );
+      }
+
+      Directory dir = await getDownloadDirectory();
+
+      String filename = "artify_${DateTime.now().microsecondsSinceEpoch}";
+
+      String filePath = '${dir.path}/$filename.jpg';
+
+      showDialog(
+        context: context,
+        barrierDismissible: true, // allow tapping outside
+        builder: (BuildContext context) {
+          return WillPopScope(
+            onWillPop: () async {
+              bool confirm = await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: appBlack(0.9, context),
+                    title: Text(
+                      "Are you sure?",
+                      style: TextStyle(
+                        color: appRed(1),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    content: Text(
+                      "Do you want to close this dialog?",
+                      style: TextStyle(color: appWhite(1, context)),
+                    ),
+                    actions: [
+                      TextButton(
+                        child: Text(
+                          "Yes",
+                          style: TextStyle(color: appRed(1), fontSize: 18),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(true); // Close it
+                          return;
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          "No",
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 7, 114, 255),
+                            fontSize: 18,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(false); // Don't close
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+              return confirm;
+            },
+            child: AlertDialog(
+              backgroundColor: appBlack(0.9, context),
+              title: Text(
+                "Processing ...",
+                style: TextStyle(
+                  color: appWhite(1, context),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: SizedBox(
+                height: 30,
+                child: Column(
+                  children: [
+                    Text(
+                      "Please wait...",
+                      style: TextStyle(color: appWhite(1, context)),
+                    ),
+                    SizedBox(
+                      width: 100,
+                      height: 3,
+                      child: LinearProgressIndicator(color: appRed(1)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+
+      Dio dio = Dio();
+      await dio.download(imageUrl, filePath);
+      Navigator.pop(context);
+
+      final File file = File(filePath);
+
+      if (!file.existsSync()) {
+        throw Exception("Image file not found at $filePath");
+      }
+
+      final bool result = await WallpaperManagerFlutter().setWallpaper(
+        file,
+        location,
+      );
+
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: appBlack(0.8, context),
+              title: Icon(
+                result
+                    ? CupertinoIcons.check_mark_circled
+                    : CupertinoIcons.clear_circled,
+                color:
+                    result ? const Color.fromARGB(255, 57, 255, 7) : appRed(1),
+                size: 40,
+              ),
+              content: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  result
+                      ? "Wallpaper successfully set!"
+                      : " Wallpaper failure!",
+                  style: TextStyle(color: appWhite(1, context), fontSize: 16),
+                ),
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(appRed(1)),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "OK",
+                    style: TextStyle(color: appWhite(1, context)),
+                  ),
+                ),
+              ],
+            ),
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: appBlack(0.9, context),
+              title: Text(
+                "Operation Failed",
+                style: TextStyle(color: appRed(1), fontWeight: FontWeight.bold),
+              ),
+              content: Column(
+                children: [
+                  Icon(CupertinoIcons.clear, color: appRed(1), size: 40),
+                  Text(
+                    "Wallpaper set operation error, try again!",
+                    style: TextStyle(color: appWhite(1, context)),
+                  ),
+                ],
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(color: appRed(1), fontSize: 18),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        downloadImageAndSetWallpaper(imageUrl, location);
+                      },
+                      child: Text(
+                        "Retry",
+                        style: TextStyle(
+                          color: const Color.fromARGB(255, 7, 114, 255),
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
@@ -40,7 +296,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
           SizedBox(
             width: screenSize.height,
             height: screenSize.height,
-            child: Image.network(imageUrl, fit: BoxFit.cover),
+            child: Image.network(imageSmallUrl, fit: BoxFit.cover),
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -49,7 +305,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: imageFullUrl,
               scale: 2,
               height: screenSize.height - screenSize.height / 7,
               fit: BoxFit.cover,
@@ -63,7 +319,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                   ),
                 );
               },
-              errorWidget: (context, url, error) => Image.network(imageUrl),
+              errorWidget: (context, url, error) => Image.network(imageFullUrl),
               fadeInDuration: Duration(seconds: 2),
               fadeInCurve: Curves.easeIn,
             ),
@@ -96,7 +352,10 @@ class _ImageViewFullState extends State<ImageViewFull> {
                   posY += details.delta.dy;
                 });
               },
-              child: DownloadImageWidget(unsplashImageUrl: imageUrl),
+              child: DownloadImageWidget(
+                unsplashImageFullUrl: imageFullUrl,
+                unsplashImageSmallUrl: imageSmallUrl,
+              ),
             ),
           ),
           Column(
@@ -133,7 +392,12 @@ class _ImageViewFullState extends State<ImageViewFull> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                downloadImageAndSetWallpaper(
+                                  imageFullUrl,
+                                  WallpaperManagerFlutter.lockScreen,
+                                );
+                              },
                               child: Text(
                                 "Lock Screen",
                                 style: TextStyle(
@@ -144,7 +408,12 @@ class _ImageViewFullState extends State<ImageViewFull> {
                             ),
                             // Spacer(),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                downloadImageAndSetWallpaper(
+                                  imageFullUrl,
+                                  WallpaperManagerFlutter.homeScreen,
+                                );
+                              },
                               child: Text(
                                 "Home Screen",
                                 style: TextStyle(
@@ -155,7 +424,12 @@ class _ImageViewFullState extends State<ImageViewFull> {
                             ),
                             // Spacer(),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                downloadImageAndSetWallpaper(
+                                  imageFullUrl,
+                                  WallpaperManagerFlutter.bothScreens,
+                                );
+                              },
                               child: Text(
                                 "Both",
                                 style: TextStyle(
@@ -185,7 +459,6 @@ class _ImageViewFullState extends State<ImageViewFull> {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Set wallpeper");
                         setState(() {
                           isVisible = !isVisible;
                         });

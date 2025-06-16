@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-Widget homeFavorite() {
+Widget homeDownloaded() {
   return Container(child: Text("Home Favorite"));
 }

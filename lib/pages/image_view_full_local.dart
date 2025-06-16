@@ -24,7 +24,6 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
     final fileLoc = await imageFile.file;
 
     if (fileLoc == null) {
-      print("can't get the image use ui to show to user");
       showDialog(
         context: context,
         builder:

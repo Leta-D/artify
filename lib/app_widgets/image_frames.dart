@@ -25,7 +25,7 @@ Widget imageFrames(BuildContext context, NetworkObject networkObject) {
                 builder:
                     (_) => ImageViewFull(
                       networkObject.rawUrlFull,
-                      networkObject.id,
+                      networkObject.rawUrl,
                     ),
               ),
             );

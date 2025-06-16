@@ -12,7 +12,7 @@ Widget catagoryFrames(
   // List<String> idList = [];
   Future<dynamic> fetchDataAndNavigate(String text) async {
     final idList = await fetchImageCollectionId(text);
-    print("Data: $idList");
+    // print("Data: $idList");
     return idList;
 
     // Navigator.push(
@@ -60,7 +60,7 @@ Widget catagoryFrames(
           ),
         );
 
-        print(text);
+        // print(text);
       },
       child: Stack(
         children: [

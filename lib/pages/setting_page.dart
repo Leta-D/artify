@@ -4,13 +4,49 @@ import 'package:aaa/pages/about_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
 
+  Future<void> _launchURL(BuildContext context, String urlLink) async {
+    final Uri url = Uri.parse(urlLink);
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: appBlack(0.9, context),
+              title: Text(
+                "Link Error",
+                style: TextStyle(
+                  color: appWhite(1, context),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: Text(
+                "Error, Can't redirect to link now!",
+                style: TextStyle(color: appWhite(1, context)),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    "OK",
+                    style: TextStyle(color: appWhite(1, context)),
+                  ),
+                ),
+              ],
+            ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppStateProvider>(context);
+    Size screenSize = MediaQuery.sizeOf(context);
     Widget textWithUnderline(String text) {
       return Column(
         children: [
@@ -37,7 +73,7 @@ class SettingPage extends StatelessWidget {
         title: Text(
           "App Settings",
           style: TextStyle(
-            fontSize: 30,
+            fontSize: screenSize.width / 13.7,
             fontWeight: FontWeight.bold,
             foreground:
                 Paint()
@@ -50,7 +86,10 @@ class SettingPage extends StatelessWidget {
       ),
       backgroundColor: appBlack(1, context),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: EdgeInsets.symmetric(
+          horizontal: screenSize.width / 41.1,
+          vertical: screenSize.height / 45.85,
+        ),
         child: Column(
           children: [
             textWithUnderline("APPEARANCE"),
@@ -66,8 +105,11 @@ class SettingPage extends StatelessWidget {
                         setApearaceMode(context);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(top: 20),
-                        padding: EdgeInsets.only(left: 40, top: 40),
+                        margin: EdgeInsets.only(top: screenSize.height / 45.85),
+                        padding: EdgeInsets.only(
+                          left: screenSize.width / 10.275,
+                          top: screenSize.height / 22.93,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 167, 165, 165),
                           border:
@@ -80,8 +122,14 @@ class SettingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(7),
                         ),
                         child: Container(
-                          width: !appProvider.appearanceMode ? 120 : 90,
-                          height: !appProvider.appearanceMode ? 70 : 50,
+                          width:
+                              !appProvider.appearanceMode
+                                  ? screenSize.width / 3.425
+                                  : screenSize.width / 4.56,
+                          height:
+                              !appProvider.appearanceMode
+                                  ? screenSize.height / 13.1
+                                  : screenSize.height / 18.34,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -97,7 +145,7 @@ class SettingPage extends StatelessWidget {
                       "Light",
                       style: TextStyle(
                         color: appWhite(1, context),
-                        fontSize: 18,
+                        fontSize: screenSize.width / 22.83,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -112,8 +160,11 @@ class SettingPage extends StatelessWidget {
                         setApearaceMode(context);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(top: 20),
-                        padding: EdgeInsets.only(left: 40, top: 40),
+                        margin: EdgeInsets.only(top: screenSize.height / 45.85),
+                        padding: EdgeInsets.only(
+                          left: screenSize.width / 10.275,
+                          top: screenSize.height / 22.93,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 44, 44, 44),
                           border:
@@ -126,8 +177,14 @@ class SettingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(7),
                         ),
                         child: Container(
-                          width: appProvider.appearanceMode ? 120 : 90,
-                          height: appProvider.appearanceMode ? 70 : 50,
+                          width:
+                              appProvider.appearanceMode
+                                  ? screenSize.width / 3.425
+                                  : screenSize.width / 4.56,
+                          height:
+                              appProvider.appearanceMode
+                                  ? screenSize.height / 13.1
+                                  : screenSize.height / 18.34,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 17, 16, 16),
                             borderRadius: BorderRadius.only(
@@ -146,7 +203,7 @@ class SettingPage extends StatelessWidget {
                       "Dark",
                       style: TextStyle(
                         color: appWhite(1, context),
-                        fontSize: 18,
+                        fontSize: screenSize.width / 22.83,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -155,7 +212,7 @@ class SettingPage extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 50),
+              padding: EdgeInsets.only(top: screenSize.height / 18.34),
               child: Column(
                 children: [
                   Row(
@@ -165,7 +222,7 @@ class SettingPage extends StatelessWidget {
                         "ENABLE VIBRATION",
                         style: TextStyle(
                           color: appWhite(0.8, context),
-                          fontSize: 18,
+                          fontSize: screenSize.width / 22.83,
                           letterSpacing: 2,
                         ),
                       ),
@@ -203,7 +260,9 @@ class SettingPage extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => AboutPage()),
                   ),
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 50),
+                padding: EdgeInsets.symmetric(
+                  vertical: screenSize.height / 18.34,
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -213,7 +272,7 @@ class SettingPage extends StatelessWidget {
                           "ABOUT",
                           style: TextStyle(
                             color: appWhite(0.8, context),
-                            fontSize: 18,
+                            fontSize: screenSize.width / 22.83,
                             letterSpacing: 2,
                           ),
                         ),
@@ -231,16 +290,20 @@ class SettingPage extends StatelessWidget {
 
             textWithUnderline("CONTACT DEVELOPER"),
             Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 50),
+              padding: EdgeInsets.only(
+                top: screenSize.height / 91.7,
+                bottom: screenSize.height / 18.34,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed:
+                        () => _launchURL(context, "https://github.com/Leta-D"),
                     child: Text(
                       "GitHub",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: screenSize.width / 25.68,
                         fontWeight: FontWeight.bold,
                         foreground:
                             Paint()
@@ -251,11 +314,12 @@ class SettingPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed:
+                        () => _launchURL(context, "https://github.com/Leta-D"),
                     child: Text(
                       "Linkiden",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: screenSize.width / 25.68,
                         fontWeight: FontWeight.bold,
                         foreground:
                             Paint()
@@ -266,11 +330,15 @@ class SettingPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed:
+                        () => _launchURL(
+                          context,
+                          "https://instagram.com/leta_a2z",
+                        ),
                     child: Text(
                       "Instagram",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: screenSize.width / 25.68,
                         fontWeight: FontWeight.bold,
                         foreground:
                             Paint()
@@ -281,11 +349,12 @@ class SettingPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed:
+                        () => _launchURL(context, "https://t.me/Leta_d1"),
                     child: Text(
                       "telegram",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: screenSize.width / 25.68,
                         fontWeight: FontWeight.bold,
                         foreground:
                             Paint()
@@ -298,10 +367,13 @@ class SettingPage extends StatelessWidget {
                 ],
               ),
             ),
-            textWithUnderline("SUGGESTIONS"),
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Any suggestion on the app?",
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: screenSize.height / 9.17),
+                child: Text(
+                  '\u00A9 2025 devloped by LETA DEJENE',
+                  style: TextStyle(color: appGrey(1), fontSize: 14),
+                ),
               ),
             ),
           ],

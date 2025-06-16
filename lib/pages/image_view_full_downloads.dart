@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:vibration/vibration.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageViewFullDownloads extends StatefulWidget {
@@ -126,6 +127,10 @@ class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
       );
 
       Navigator.pop(context);
+
+      // if (await Vibration.hasVibrator() ?? false) {
+      //   Vibration.vibrate();
+      // }
       showDialog(
         context: context,
         builder:
@@ -167,7 +172,6 @@ class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
             ),
       );
     } catch (e) {
-      // print(e);
       showDialog(
         context: context,
         builder:

@@ -1,4 +1,5 @@
 import 'package:aaa/app_background/app_state_provider.dart';
+import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/app_widgets/future_images_list.dart';
 import 'package:aaa/app_widgets/home_dashboard.dart';
 import 'package:aaa/app_widgets/home_downloaded.dart';
@@ -38,6 +39,20 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             homeDashboard(context, dashboardEvents),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (int i = 0; i < 5; i++)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Icon(
+                      CupertinoIcons.circle_fill,
+                      color: (i == 1) ? appWhite(1, context) : appGrey(0.6),
+                      size: 8,
+                    ),
+                  ),
+              ],
+            ),
             mainMiddelNav(context, middelNavElemnts, true),
             SizedBox(
               height: screenSize.height / 1.275,

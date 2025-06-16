@@ -42,6 +42,8 @@ dependencies:
   wallpaper_manager_flutter: ^1.0.1
   flutter_downloader: ^1.11.6
   path_provider: ^2.1.2
+  url_launcher: ^6.3.1
+  # vibration: ^3.1.3
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +69,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/background1.jpg
     - assets/images/background2.jpg
     - assets/images/background3.jpg
 
@@ -87,7 +88,6 @@ flutter:
     - assets/images/collections/colorful.jpg
     - assets/images/collections/motivational.jpg
     - assets/images/collections/space.jpg
-    - assets/icons/instagram_icon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

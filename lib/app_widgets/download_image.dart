@@ -84,6 +84,7 @@ class _DownloadImageWidgetState extends State<DownloadImageWidget> {
               ),
         );
       }
+      Permission.notification.request();
 
       Directory dir = await getDownloadDirectory();
 

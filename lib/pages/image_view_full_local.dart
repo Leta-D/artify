@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
+// import 'package:vibration/vibration.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageViewFullLocal extends StatefulWidget {
@@ -127,6 +128,10 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
         location,
       );
       Navigator.pop(context);
+
+      // if (await Vibration.hasVibrator() ?? false) {
+      //   Vibration.vibrate();
+      // }
       showDialog(
         context: context,
         builder:

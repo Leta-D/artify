@@ -41,29 +41,6 @@ Future searchData(
   dio.close();
 }
 
-// Future fetchData(String query, int pageNo, {int perPage = 24}) async {
-//   dio.options.queryParameters = {
-//     'per_page': perPage,
-//     'query': query,
-//     'page': pageNo,
-//   };
-//   try {
-//     Response response = await dio.get('/photos');
-
-//     if (response.statusCode == 200) {
-//       images =
-//           (response.data as List)
-//               .map((json) => NetworkObject.fromJson(json))
-//               .toList();
-//       return images;
-//     } else {
-//       print("Failed to fetch data, Status code: ${response.statusCode}");
-//     }
-//   } catch (e) {
-//     print("Error: $e");
-//   }
-// }
-
 List<String> currentCollectionIds = [];
 
 Future fetchImageCollectionId(String text) async {
@@ -103,47 +80,6 @@ Future fetchImageByCollectionId(String id) async {
   } catch (e) {
     print("Error: $e");
   }
-}
-
-// Future<void> fetchDownloadLocation(String imageId) async {
-//   final dio = Dio();
-//   try {
-//     Response response = await dio.get('/photos/$imageId/download');
-//     if (response.statusCode == 200) {
-//       print(response.data);
-//       // return images;
-//     } else {
-//       print("Failed to fetch data, Status code: ${response.statusCode}");
-//     }
-//   } catch (e) {
-//     print("Error: $e");
-//   }
-// }
-
-Future<String?> fetchDownloadLocation(String photoId) async {
-  final dio = Dio();
-  try {
-    final response = await dio.get(
-      photoId,
-      options: Options(
-        headers: {'Authorization': 'Client-ID $apiKey'},
-        followRedirects: false,
-        // validateStatus: (status) => status == 302,
-      ),
-    );
-
-    // final redirectedUrl = response.headers.value(
-    //   'location',
-    // ); // Actual image URL
-    // print(response.statusCode);
-    // print(response.isRedirect);
-    // dio.download(response.data["url"], "/home/leta/Desktop");
-    // return redirectedUrl;
-  } catch (e) {
-    print('Error fetching image URL: $e');
-    return null;
-  }
-  return null;
 }
 
 // Replace with your Unsplash API Client ID

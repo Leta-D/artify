@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 Widget homeLocal() {
-  return SizedBox(height: 650, child: HomeLocal());
+  return HomeLocal();
 }
 
 class HomeLocal extends StatefulWidget {
@@ -26,7 +26,6 @@ class _HomeLocalState extends State<HomeLocal> {
 
   Future<void> requestPermissionsAndLoadImage() async {
     final PermissionState result = await PhotoManager.requestPermissionExtend();
-    print(result.hasAccess);
     if (!result.isAuth) {
       showDialog(
         context: context,
@@ -91,134 +90,145 @@ class _HomeLocalState extends State<HomeLocal> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
-    return Scaffold(
-      backgroundColor: appBlack(1, context),
-      body:
-          images.isEmpty
-              ? Center(
-                child: CircularProgressIndicator(
-                  color: appProgressIndicator(1),
-                ),
-              )
-              : Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: GridView.builder(
-                  itemCount: images.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+    return SizedBox(
+      height: screenSize.height / 1.412,
+      child: Scaffold(
+        backgroundColor: appBlack(1, context),
+        body:
+            images.isEmpty
+                ? Center(
+                  child: CircularProgressIndicator(
+                    color: appProgressIndicator(1),
                   ),
-                  itemBuilder: (_, index) {
-                    return FutureBuilder(
-                      future: images[index].thumbnailDataWithSize(
-                        ThumbnailSize(200, 200),
-                      ),
-                      builder: (_, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              color: appProgressIndicator(1),
-                            ),
-                          );
-                        } else if (snapshot.hasData) {
-                          return Container(
-                            margin: EdgeInsets.all(2),
-                            padding: EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                              color: appGrey(1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: InkWell(
-                              onLongPress: () {
-                                showDialog(
-                                  context: context,
-                                  builder:
-                                      (_) => AlertDialog(
-                                        backgroundColor: appBlack(0.9, context),
-                                        title: Icon(
-                                          CupertinoIcons.delete_solid,
-                                          size: 40,
-                                          color: appRed(1),
-                                        ),
-                                        content: Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 80,
+                )
+                : Padding(
+                  padding: EdgeInsets.only(bottom: screenSize.height / 91.7),
+                  child: GridView.builder(
+                    itemCount: images.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                    itemBuilder: (_, index) {
+                      return FutureBuilder(
+                        future: images[index].thumbnailDataWithSize(
+                          ThumbnailSize(
+                            (screenSize.height / 2).toInt(),
+                            (screenSize.height / 4.5).toInt(),
+                          ),
+                        ),
+                        builder: (_, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: appProgressIndicator(1),
+                              ),
+                            );
+                          } else if (snapshot.hasData) {
+                            return Container(
+                              margin: EdgeInsets.all(2),
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: appGrey(1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: InkWell(
+                                onLongPress: () {
+                                  showDialog(
+                                    context: context,
+                                    builder:
+                                        (_) => AlertDialog(
+                                          backgroundColor: appBlack(
+                                            0.9,
+                                            context,
                                           ),
-                                          child: Text(
-                                            "Delete photo!",
-                                            style: TextStyle(
-                                              color: appWhite(1, context),
+                                          title: Icon(
+                                            CupertinoIcons.delete_solid,
+                                            size: screenSize.width / 10.275,
+                                            color: appRed(1),
+                                          ),
+                                          content: Padding(
+                                            padding: EdgeInsets.only(
+                                              left: screenSize.width / 5.137,
                                             ),
-                                          ),
-                                        ),
-                                        actionsAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () async {
-                                              await PhotoManager.editor
-                                                  .deleteWithIds([
-                                                    images[index].id,
-                                                  ]);
-                                              setState(() {
-                                                Navigator.pop(context);
-                                              });
-                                            },
                                             child: Text(
-                                              "Delete",
-                                              style: TextStyle(
-                                                color: appRed(1),
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ),
-                                          ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                    appRed(1),
-                                                  ),
-                                            ),
-                                            onPressed:
-                                                () => Navigator.pop(context),
-                                            child: Text(
-                                              "Cancel",
+                                              "Delete photo!",
                                               style: TextStyle(
                                                 color: appWhite(1, context),
-                                                fontSize: 16,
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                );
-                              },
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (_) => ImageViewFullLocal(
-                                          snapshot.data!,
-                                          images[index],
+                                          actionsAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () async {
+                                                await PhotoManager.editor
+                                                    .deleteWithIds([
+                                                      images[index].id,
+                                                    ]);
+                                                setState(() {
+                                                  Navigator.pop(context);
+                                                });
+                                              },
+                                              child: Text(
+                                                "Delete",
+                                                style: TextStyle(
+                                                  color: appRed(1),
+                                                  fontSize:
+                                                      screenSize.width / 22.83,
+                                                ),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStatePropertyAll(
+                                                      appRed(1),
+                                                    ),
+                                              ),
+                                              onPressed:
+                                                  () => Navigator.pop(context),
+                                              child: Text(
+                                                "Cancel",
+                                                style: TextStyle(
+                                                  color: appWhite(1, context),
+                                                  fontSize:
+                                                      screenSize.width / 25.68,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                  ),
-                                );
-                              },
-                              child: Image.memory(
-                                snapshot.data!,
-                                fit: BoxFit.cover,
+                                  );
+                                },
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (_) => ImageViewFullLocal(
+                                            snapshot.data!,
+                                            images[index],
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Image.memory(
+                                  snapshot.data!,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                          );
-                        } else {
-                          return Container(color: appGrey(1));
-                        }
-                      },
-                    );
-                  },
+                            );
+                          } else {
+                            return Container(color: appGrey(1));
+                          }
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
+      ),
     );
   }
 }

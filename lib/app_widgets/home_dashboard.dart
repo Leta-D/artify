@@ -19,7 +19,7 @@ Widget homeDashboard(
     }
     pageControler.animateToPage(
       currentDashboardIndex,
-      duration: Duration(seconds: 1),
+      duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   });

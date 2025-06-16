@@ -16,7 +16,7 @@ Future searchData(
   String text,
   int pageNo,
   bool isHome, {
-  int perPage = 24,
+  int perPage = 30,
 }) async {
   final dio = Dio(option);
   dio.options.queryParameters = {

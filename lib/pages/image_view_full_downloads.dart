@@ -1,131 +1,131 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_manager/photo_manager.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
-class ImageViewFullLocal extends StatefulWidget {
-  Uint8List imageLoc;
-  AssetEntity imageFile;
-  ImageViewFullLocal(this.imageLoc, this.imageFile, {super.key});
+class ImageViewFullDownloads extends StatefulWidget {
+  final String imagePath;
+  const ImageViewFullDownloads(this.imagePath, {super.key});
   @override
-  createState() => _ImageViewFullLocalState(imageLoc, imageFile);
+  createState() => _ImageViewFullDownloadState(imagePath);
 }
 
-class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
-  Uint8List imageLoc;
-  AssetEntity imageFile;
-  _ImageViewFullLocalState(this.imageLoc, this.imageFile);
+class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
+  final String imagePath;
+  _ImageViewFullDownloadState(this.imagePath);
 
   Future<void> setImageAsWallpaper(int location) async {
-    final fileLoc = await imageFile.file;
+    try {
+      final imageFile = File(imagePath);
 
-    if (fileLoc == null) {
+      if (!imageFile.existsSync()) {
+        showDialog(
+          context: context,
+          builder:
+              (_) => AlertDialog(
+                title: Icon(
+                  CupertinoIcons.clear_circled,
+                  color: appRed(1),
+                  size: 40,
+                ),
+                content: Text(
+                  "Can't get the image, try agin!",
+                  style: TextStyle(color: appRed(1)),
+                ),
+              ),
+        );
+        return;
+      }
+
       showDialog(
         context: context,
-        builder:
-            (_) => AlertDialog(
-              title: Icon(
-                CupertinoIcons.clear_circled,
-                color: appRed(1),
-                size: 40,
-              ),
-              content: Text(
-                "Can't get the image, try agin!",
-                style: TextStyle(color: appRed(1)),
-              ),
-            ),
-      );
-      return;
-    }
-    showDialog(
-      context: context,
-      barrierDismissible: true, // allow tapping outside
-      builder: (BuildContext context) {
-        return WillPopScope(
-          onWillPop: () async {
-            bool confirm = await showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: appBlack(0.9, context),
-                  title: Text(
-                    "Are you sure?",
-                    style: TextStyle(
-                      color: appRed(1),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  content: Text(
-                    "Do you want to close this dialog?",
-                    style: TextStyle(color: appWhite(1, context)),
-                  ),
-                  actions: [
-                    TextButton(
-                      child: Text(
-                        "Yes",
-                        style: TextStyle(color: appRed(1), fontSize: 18),
+        barrierDismissible: true, // allow tapping outside
+        builder: (BuildContext context) {
+          return WillPopScope(
+            onWillPop: () async {
+              bool confirm = await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: appBlack(0.9, context),
+                    title: Text(
+                      "Are you sure?",
+                      style: TextStyle(
+                        color: appRed(1),
+                        fontWeight: FontWeight.bold,
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pop(true); // Close it
-                        return;
-                      },
                     ),
-                    TextButton(
-                      child: Text(
-                        "No",
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 7, 114, 255),
-                          fontSize: 18,
+                    content: Text(
+                      "Do you want to close this dialog?",
+                      style: TextStyle(color: appWhite(1, context)),
+                    ),
+                    actions: [
+                      TextButton(
+                        child: Text(
+                          "Yes",
+                          style: TextStyle(color: appRed(1), fontSize: 18),
                         ),
+                        onPressed: () {
+                          Navigator.of(context).pop(true); // Close it
+                          return;
+                        },
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pop(false); // Don't close
-                      },
+                      TextButton(
+                        child: Text(
+                          "No",
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 7, 114, 255),
+                            fontSize: 18,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(false); // Don't close
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+              return confirm;
+            },
+            child: AlertDialog(
+              backgroundColor: appBlack(0.9, context),
+              title: Text(
+                "Processing ...",
+                style: TextStyle(
+                  color: appWhite(1, context),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: SizedBox(
+                height: 30,
+                child: Column(
+                  children: [
+                    Text(
+                      "Please wait...",
+                      style: TextStyle(color: appWhite(1, context)),
+                    ),
+                    SizedBox(
+                      width: 100,
+                      height: 3,
+                      child: LinearProgressIndicator(color: appRed(1)),
                     ),
                   ],
-                );
-              },
-            );
-            return confirm;
-          },
-          child: AlertDialog(
-            backgroundColor: appBlack(0.9, context),
-            title: Text(
-              "Processing ...",
-              style: TextStyle(
-                color: appWhite(1, context),
-                fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            content: SizedBox(
-              height: 30,
-              child: Column(
-                children: [
-                  Text(
-                    "Please wait...",
-                    style: TextStyle(color: appWhite(1, context)),
-                  ),
-                  SizedBox(
-                    width: 100,
-                    height: 3,
-                    child: LinearProgressIndicator(color: appRed(1)),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-    try {
+          );
+        },
+      );
+
       final result = await WallpaperManagerFlutter().setWallpaper(
-        fileLoc,
+        imageFile,
         location,
       );
+
       Navigator.pop(context);
       showDialog(
         context: context,
@@ -193,36 +193,21 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
           SizedBox(
             width: screenSize.height,
             height: screenSize.height,
-            child: Image.memory(imageLoc, fit: BoxFit.cover),
+            child: Image.file(File(imagePath), fit: BoxFit.cover),
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(color: appGrey(0)),
           ),
-          FutureBuilder(
-            future: imageFile.file,
-            builder: (_, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: appProgressIndicator(1),
-                  ),
-                );
-              } else if (snapshot.hasData) {
-                return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.file(
-                    snapshot.data!,
-                    scale: 2,
-                    height: screenSize.height - screenSize.height / 7,
-                    fit: BoxFit.cover,
-                    semanticLabel: "ARTify",
-                  ),
-                );
-              } else {
-                return Container(color: appGrey(1));
-              }
-            },
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Image.file(
+              File(imagePath),
+              scale: 2,
+              height: screenSize.height - screenSize.height / 7,
+              fit: BoxFit.cover,
+              semanticLabel: "ARTify",
+            ),
           ),
 
           Align(
@@ -290,7 +275,6 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                                 ),
                               ),
                             ),
-                            // Spacer(),
                             TextButton(
                               onPressed: () {
                                 setImageAsWallpaper(

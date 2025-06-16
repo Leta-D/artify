@@ -26,15 +26,15 @@ class HomePage extends StatelessWidget {
 
   final middelNavElemnts = [
     {"icon": CupertinoIcons.layers_alt_fill, "label": "New"},
-    {"icon": CupertinoIcons.heart_fill, "label": "Favorites"},
-    {"icon": CupertinoIcons.money_dollar, "label": "Local"},
+    {"icon": CupertinoIcons.download_circle_fill, "label": "Downloads"},
+    {"icon": CupertinoIcons.photo_fill_on_rectangle_fill, "label": "Gallery"},
   ];
 
   @override
   Widget build(BuildContext context) {
     final homeNavElements = [
       FutureImagesList("query", true),
-      homeDownloaded(),
+      HomeDownloaded(),
       homeLocal(),
     ];
     final screenSize = MediaQuery.sizeOf(context);

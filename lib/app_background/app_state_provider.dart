@@ -10,7 +10,7 @@ class AppStateProvider extends ChangeNotifier {
   }
 
   // for main page
-  int _mainBottomNavIndex = 1;
+  int _mainBottomNavIndex = 0;
   int get mainBottomNavIndex => _mainBottomNavIndex;
   void changeMainBottomNavIndex(int index) {
     _mainBottomNavIndex = index;

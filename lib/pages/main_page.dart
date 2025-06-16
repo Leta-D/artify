@@ -1,7 +1,6 @@
 import 'package:aaa/app_background/app_state_provider.dart';
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/app_widgets/main_bottom_nav.dart';
-// import 'package:aaa/app_widgets/main_middel_nav.dart';
 import 'package:aaa/pages/catagory_page.dart';
 import 'package:aaa/pages/home_page.dart';
 import 'package:aaa/pages/setting_page.dart';

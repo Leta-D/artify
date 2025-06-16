@@ -20,7 +20,7 @@ class ImageViewFull extends StatefulWidget {
 
 class _ImageViewFullState extends State<ImageViewFull> {
   String imageFullUrl;
-  String imageSmallUrl; // instad use full to download no id needed
+  String imageSmallUrl;
   _ImageViewFullState(this.imageFullUrl, this.imageSmallUrl);
 
   bool isVisible = false;
@@ -93,7 +93,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
 
       showDialog(
         context: context,
-        barrierDismissible: true, // allow tapping outside
+        barrierDismissible: true,
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () async {
@@ -120,7 +120,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                           style: TextStyle(color: appRed(1), fontSize: 18),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop(true); // Close it
+                          Navigator.of(context).pop(true);
                           return;
                         },
                       ),
@@ -133,7 +133,7 @@ class _ImageViewFullState extends State<ImageViewFull> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop(false); // Don't close
+                          Navigator.of(context).pop(false);
                         },
                       ),
                     ],
@@ -406,7 +406,6 @@ class _ImageViewFullState extends State<ImageViewFull> {
                                 ),
                               ),
                             ),
-                            // Spacer(),
                             TextButton(
                               onPressed: () {
                                 downloadImageAndSetWallpaper(
@@ -422,7 +421,6 @@ class _ImageViewFullState extends State<ImageViewFull> {
                                 ),
                               ),
                             ),
-                            // Spacer(),
                             TextButton(
                               onPressed: () {
                                 downloadImageAndSetWallpaper(

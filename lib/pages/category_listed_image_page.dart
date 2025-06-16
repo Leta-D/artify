@@ -38,8 +38,6 @@ class _CategoryListedImagePageState extends State<CategoryListedImagePage> {
         counter =
             (counter + 1 == currentCollectionIds.length) ? 0 : counter + 1;
       });
-      print("End");
-      // return fetchImageByCollectionId(allRelatedCollectionId![counter]);
     }
     return;
   }

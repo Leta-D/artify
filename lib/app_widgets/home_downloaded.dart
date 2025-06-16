@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/pages/image_view_full_downloads.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeDownloaded extends StatefulWidget {

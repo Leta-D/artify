@@ -12,13 +12,7 @@ Widget catagoryFrames(
   // List<String> idList = [];
   Future<dynamic> fetchDataAndNavigate(String text) async {
     final idList = await fetchImageCollectionId(text);
-    // print("Data: $idList");
     return idList;
-
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (_) => CategoryListedImagePage(text, idList)),
-    // );
   }
 
   Size screenSize = MediaQuery.sizeOf(context);

@@ -10,7 +10,6 @@ BaseOptions option = BaseOptions(
 );
 
 List<NetworkObject> images = [];
-// final dio = Dio(option);
 
 Future searchData(
   String text,
@@ -32,7 +31,6 @@ Future searchData(
           (((isHome) ? response.data : response.data['results']) as List)
               .map((json) => NetworkObject.fromJson(json))
               .toList();
-      // print(response.data['results']);
       return images;
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");
@@ -79,7 +77,6 @@ Future fetchImageCollectionId(String text) async {
       for (var item in response.data['results']) {
         currentCollectionIds.add(item['id']);
       }
-      // print(currentCollectionIds);
       return currentCollectionIds;
     } else {
       print("Failed to fetch data, Status code: ${response.statusCode}");

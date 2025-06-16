@@ -9,13 +9,6 @@ import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  /*
-- assets/images/collections/beatch.jpg
-    - assets/images/collections/bridge.jpg
-    - assets/images/collections/colorful.jpg
-    - assets/images/collections/motivational.jpg
-    - assets/images/collections/space.jpg
-*/
   final Map<String, String> dashboardEvents = {
     "Beaches": "assets/images/collections/beatch.jpg",
     "Bridges": "assets/images/collections/bridge.jpg",

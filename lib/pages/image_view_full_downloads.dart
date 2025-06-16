@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,7 @@ class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
 
       showDialog(
         context: context,
-        barrierDismissible: true, // allow tapping outside
+        barrierDismissible: true,
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () async {
@@ -69,7 +68,7 @@ class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
                           style: TextStyle(color: appRed(1), fontSize: 18),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop(true); // Close it
+                          Navigator.of(context).pop(true);
                           return;
                         },
                       ),
@@ -82,7 +81,7 @@ class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop(false); // Don't close
+                          Navigator.of(context).pop(false);
                         },
                       ),
                     ],
@@ -168,7 +167,24 @@ class _ImageViewFullDownloadState extends State<ImageViewFullDownloads> {
             ),
       );
     } catch (e) {
-      print(e);
+      // print(e);
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              title: Text(
+                "Processing Error",
+                style: TextStyle(
+                  color: appWhite(1, context),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: Text(
+                "Internal error occoured try agin!",
+                style: TextStyle(color: appRed(1), fontSize: 18),
+              ),
+            ),
+      );
     }
   }
 

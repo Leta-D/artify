@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 Widget imageFrames(BuildContext context, NetworkObject networkObject) {
   Size screenSize = MediaQuery.sizeOf(context);
-  // final appProvide = Provider.of<AppStateProvider>(context);
   return Column(
     children: [
       Container(

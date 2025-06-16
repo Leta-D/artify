@@ -1,8 +1,5 @@
-// import 'dart:typed_data';
 import 'dart:io';
-
 import 'package:aaa/app_theme/app_colors.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -199,7 +196,6 @@ class _DownloadImageWidgetState extends State<DownloadImageWidget> {
                 ],
               ),
         );
-        // downloadImageToDownloadsArtifyDir(unsplashImageUrl);
       },
       child: Icon(CupertinoIcons.down_arrow),
     );

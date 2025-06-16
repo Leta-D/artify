@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 Widget homeLocal() {
-  // return Container(child: Text("Home Local"));
   return SizedBox(height: 650, child: HomeLocal());
 }
 
@@ -56,7 +55,6 @@ class _HomeLocalState extends State<HomeLocal> {
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    // openAppSettings();
                     PhotoManager.openSetting();
                   },
                   child: Text(

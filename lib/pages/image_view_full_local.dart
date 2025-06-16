@@ -8,9 +8,9 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageViewFullLocal extends StatefulWidget {
-  Uint8List imageLoc;
-  AssetEntity imageFile;
-  ImageViewFullLocal(this.imageLoc, this.imageFile, {super.key});
+  final Uint8List imageLoc;
+  final AssetEntity imageFile;
+  const ImageViewFullLocal(this.imageLoc, this.imageFile, {super.key});
   @override
   createState() => _ImageViewFullLocalState(imageLoc, imageFile);
 }
@@ -43,7 +43,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
     }
     showDialog(
       context: context,
-      barrierDismissible: true, // allow tapping outside
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return WillPopScope(
           onWillPop: () async {
@@ -70,7 +70,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                         style: TextStyle(color: appRed(1), fontSize: 18),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pop(true); // Close it
+                        Navigator.of(context).pop(true);
                         return;
                       },
                     ),
@@ -83,7 +83,7 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pop(false); // Don't close
+                        Navigator.of(context).pop(false);
                       },
                     ),
                   ],
@@ -168,7 +168,24 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
             ),
       );
     } catch (e) {
-      print(e);
+      // print(e);
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              title: Text(
+                "Processing Error",
+                style: TextStyle(
+                  color: appWhite(1, context),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: Text(
+                "Internal error occoured try agin!",
+                style: TextStyle(color: appRed(1), fontSize: 18),
+              ),
+            ),
+      );
     }
   }
 
@@ -290,7 +307,6 @@ class _ImageViewFullLocalState extends State<ImageViewFullLocal> {
                                 ),
                               ),
                             ),
-                            // Spacer(),
                             TextButton(
                               onPressed: () {
                                 setImageAsWallpaper(

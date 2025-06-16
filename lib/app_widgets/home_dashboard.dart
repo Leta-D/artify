@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:aaa/app_theme/app_colors.dart';
 import 'package:aaa/app_widgets/catagory_frams.dart';
 import 'package:flutter/material.dart';
 
-// takes map that gone contain key=describing and value=imageUrl
 Widget homeDashboard(
   BuildContext context,
   Map<String, String> dashboardEvents,

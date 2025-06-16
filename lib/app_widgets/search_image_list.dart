@@ -18,7 +18,6 @@ class _SearchImageListState extends State<SearchImageList> {
   _SearchImageListState(this.title, this.isHome);
 
   final ScrollController _scrollController = ScrollController();
-  // bool isLoading = false;
 
   @override
   void initState() {
@@ -33,8 +32,6 @@ class _SearchImageListState extends State<SearchImageList> {
       setState(() {
         counter = (counter == 10) ? 0 : counter + 1;
       });
-      print("End");
-      // return fetchImageByCollectionId(allRelatedCollectionId![counter]);
     }
   }
 

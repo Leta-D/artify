@@ -1,16 +1,49 @@
-# aaa
+ # 🎨 Artify - Wallpaper Application
+ 
+  A flutter app project as my learning progress milestone.
+  
+**Artify** is a beautiful, modern wallpaper app built using **Flutter**, designed to bring high-quality and category-based wallpapers to your fingertips. It fetches images from the **Unsplash API** and allows users to browse, search, download, and set wallpapers effortlessly — all while managing downloaded content locally.
 
-A new Flutter project.
+---
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- 🔍 **Search Wallpapers**: Find wallpapers by keywords with smooth filtering and suggestions.
+- 🗂️ **Category Browsing**: Explore wallpapers through curated categories.
+- ⬇️ **Download Wallpapers**: Save images in your preferred quality to your device.
+- 🖼️ **Set as Wallpaper**: Apply wallpapers directly to your **home**, **lock**, or **both** screens.
+- 📁 **Manage Downloads**:
+  - Delete images downloaded via Artify.
+  - Manage and delete images from your device's gallery.
+- 🖌️ **Modern UI**: Clean and intuitive interface with responsive design.
+- 📤 **Image Source**: High-quality images sourced from the **Unsplash API**.
+- 📶 **Offline Support**: Manage and apply wallpapers even when offline.
+- 🔗 **Connect with Us**: Easy access to GitHub, Telegram, and Instagram.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Framework**: Flutter (Dart)
+- **State Management**: Provider
+- **API Integration**: Unsplash API via Dio
+- **Local Storage**: SharedPreferences & File handling
+- **Permissions**: Storage & Wallpaper setting permissions
+- **Platform**: Android (Tested), iOS (Coming soon)
+
+Thanks for viewing my project
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter SDK: [Install Flutter](https://flutter.dev/docs/get-started/install)
+- An Unsplash API Access Key (get one at [Unsplash Developers](https://unsplash.com/developers))
+
+### Setup
+
+```bash
+git clone https://github.com/yourusername/artify.git
+cd artify
+flutter pub get
+

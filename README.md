@@ -33,7 +33,7 @@
 
 Thanks for viewing my project
 
-## Download link
+## Download link (for android)
 if you want to test my app head to tag section and download the app  
 OR  
 use the link below.

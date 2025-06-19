@@ -40,7 +40,7 @@ use the link below.
 
 https://github.com/Leta-D/artify/releases/download/v1.0.0/artify.apk
 
-## 🚀 Getting Started
+## To locally test the app code
 
 ### Prerequisites
 

@@ -33,6 +33,13 @@
 
 Thanks for viewing my project
 
+## Download link
+if you want to test my app head to tag section and download the app  
+OR  
+use the link below.
+
+https://github.com/Leta-D/artify/releases/download/v1.0.0/artify.apk
+
 ## 🚀 Getting Started
 
 ### Prerequisites
